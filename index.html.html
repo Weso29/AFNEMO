@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundación Raíces Afro — UI Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root {
+    --gold: #D4A853;
+    --gold-light: #E8C97A;
+    --deep-brown: #2C1810;
+    --warm-black: #1A1210;
+    --earth-red: #8B3A2F;
+    --earth-red-light: #B84C3E;
+    --cream: #F5EDE0;
+    --cream-dark: #E8DCC8;
+    --sage: #5C6B4F;
+    --sage-light: #7A8E6A;
+    --text-dark: #1A1210;
+    --text-light: #F5EDE0;
+    --accent-orange: #D97B2F;
+    --overlay: rgba(26, 18, 16, 0.7);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ============================================
+     NAVIGATION
+     Inspirado en: The Africa Center, NAACP
+  ============================================ */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+
+  nav.scrolled {
+    background: var(--warm-black);
+    padding: 0.7rem 3rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav-logo-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--warm-black);
+    font-weight: 700;
+  }
+
+  .nav-logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--text-light);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--warm-black) !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    transition: all 0.3s ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold-light) !important;
+    transform: translateY(-2px);
+  }
+
+  .nav-cta::after { display: none !important; }
+
+  /* ============================================
+     HERO SECTION
+     Inspirado en: African Diaspora Network hero
+     con video/imagen de fondo a pantalla completa
+  ============================================ */
+  .hero {
+    height: 100vh;
+    min-height: 700px;
+    background: var(--warm-black);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 3rem 5rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, transparent 50%),
+      linear-gradient(to bottom, transparent 40%, var(--warm-black) 100%),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><pattern id="p" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="30" cy="30" r="1.5" fill="rgba(212,168,83,0.08)"/></pattern></defs><rect fill="url(%23p)" width="800" height="800"/></svg>');
+    background-size: cover;
+  }
+
+  /* Geometric Adinkra-inspired decorative element */
+  .hero-deco {
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    width: 350px;
+    height: 350px;
+    opacity: 0.06;
+    animation: floatSlow 12s ease-in-out infinite;
+  }
+
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(212, 168, 83, 0.15);
+    border: 1px solid rgba(212, 168, 83, 0.3);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-tag-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease 0.5s both;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: rgba(245, 237, 224, 0.7);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gold);
+    color: var(--warm-black);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 168, 83, 0.3);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--cream);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1.5px solid rgba(245, 237, 224, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(245, 237, 224, 0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeUp 1s ease 1.2s both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ============================================
+     IMPACT STATS BAR
+     Inspirado en: ADN stats section
+  ============================================ */
+  .stats-bar {
+    background: var(--deep-brown);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    position: relative;
+  }
+
+  .stats-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--earth-red), var(--sage), var(--gold));
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: rgba(245, 237, 224, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+  }
+
+  /* ============================================
+     ABOUT / MISSION SECTION
+     Inspirado en: The Africa Center, NAACP
+  ============================================ */
+  .about {
+    padding: 8rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-img-main {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--deep-brown);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-img-main::before {
+    content: '📸 Imagen de la comunidad';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245, 237, 224, 0.3);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+
+  .about-img-accent {
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    width: 200px;
+    height: 200px;
+    background: var(--gold);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .about-img-accent-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--warm-black);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .about-img-accent-text span {
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--earth-red);
+    margin-bottom: 1rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1.2rem;
+    height: 2px;
+    background: var(--earth-red);
+  }
+
+  .about-content h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: var(--deep-brown);
+  }
+
+  .about-content h2 span {
+    color: var(--earth-red);
+    font-style: italic;
+  }
+
+  .about-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(44, 24, 16, 0.7);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: rgba(44, 24, 16, 0.03);
+    border-radius: 10px;
+    border: 1px solid rgba(44, 24, 16, 0.06);
+  }
+
+  .value-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--earth-red);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .value-item h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: var(--deep-brown);
+  }
+
+  .value-item p {
+    font-size: 0.78rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ============================================
+     PROGRAMS SECTION
+     Inspirado en: ADN Programs, BAF Accelerator
+  ============================================ */
+  .programs {
+    background: var(--warm-black);
+    padding: 8rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .programs::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(212, 168, 83, 0.05), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .programs-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 5rem;
+  }
+
+  .programs-header .section-tag {
+    color: var(--gold);
+  }
+
+  .programs-header .section-tag::before {
+    background: var(--gold);
+  }
+
+  .programs-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .programs-header p {
+    color: rgba(245, 237, 224, 0.5);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .program-card {
+    background: rgba(245, 237, 224, 0.04);
+    border: 1px solid rgba(245, 237, 224, 0.08);
+    border-radius: 16px;
+    padding: 2.5rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .program-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .program-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .program-card:hover {
+    background: rgba(245, 237, 224, 0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+
+  .program-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--gold), var(--accent-orange));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .program-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+
+  .program-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(245, 237, 224, 0.5);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .program-link {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+  }
+
+  .program-link:hover {
+    gap: 0.8rem;
+  }
+
+  /* ============================================
+     CTA / DONATE BANNER
+     Inspirado en: NAACP donate section
+  ============================================ */
+  .cta-banner {
+    padding: 6rem 3rem;
+    background: 
+      linear-gradient(135deg, var(--earth-red) 0%, var(--deep-brown) 100%);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="k" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M20 0L40 20L20 40L0 20Z" fill="none" stroke="rgba(245,237,224,0.04)" stroke-width="1"/></pattern></defs><rect fill="url(%23k)" width="200" height="200"/></svg>');
+    background-size: 40px 40px;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-content h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: var(--cream);
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .cta-content p {
+    color: rgba(245, 237, 224, 0.7);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--cream);
+    color: var(--earth-red);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  /* ============================================
+     NEWS / BLOG SECTION
+     Inspirado en: ADN News, The Africa Center
+  ============================================ */
+  .news {
+    padding: 8rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .news-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    color: var(--deep-brown);
+    line-height: 1.15;
+  }
+
+  .news-header a {
+    color: var(--earth-red);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+  }
+
+  .news-header a:hover { gap: 0.8rem; }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .news-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border: 1px solid rgba(44, 24, 16, 0.06);
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(44, 24, 16, 0.1);
+  }
+
+  .news-card-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: var(--cream-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .news-card:first-child .news-card-img {
+    aspect-ratio: 16/12;
+  }
+
+  .news-card-img::before {
+    content: '📷 Imagen del artículo';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(44, 24, 16, 0.2);
+    font-size: 0.85rem;
+  }
+
+  .news-card-body {
+    padding: 1.5rem;
+  }
+
+  .news-card-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--earth-red);
+    margin-bottom: 0.75rem;
+  }
+
+  .news-card-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--deep-brown);
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-card:first-child .news-card-body h3 {
+    font-size: 1.5rem;
+  }
+
+  .news-card-body p {
+    font-size: 0.85rem;
+    color: rgba(44, 24, 16, 0.5);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .news-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(44, 24, 16, 0.06);
+    font-size: 0.75rem;
+    color: rgba(44, 24, 16, 0.4);
+  }
+
+  /* ============================================
+     TEAM SECTION
+     Inspirado en: ADN Our Team page
+  ============================================ */
+  .team {
+    background: var(--cream-dark);
+    padding: 8rem 3rem;
+  }
+
+  .team-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .team-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+
+  .team-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    color: var(--deep-brown);
+    margin-bottom: 1rem;
+  }
+
+  .team-header p {
+    color: rgba(44, 24, 16, 0.5);
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .team-card {
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .team-card:hover .team-card-img {
+    transform: scale(1.05);
+  }
+
+  .team-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--deep-brown);
+    border-radius: 16px;
+    margin-bottom: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+  }
+
+  .team-card-img::before {
+    content: '👤';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    opacity: 0.2;
+  }
+
+  .team-card h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.3rem;
+  }
+
+  .team-card p {
+    font-size: 0.8rem;
+    color: rgba(44, 24, 16, 0.5);
+    font-weight: 400;
+  }
+
+  /* ============================================
+     PARTNERS / ALLIES SECTION
+  ============================================ */
+  .partners {
+    padding: 5rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .partners-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(44, 24, 16, 0.3);
+    margin-bottom: 2.5rem;
+  }
+
+  .partners-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .partner-logo {
+    width: 120px;
+    height: 50px;
+    background: rgba(44, 24, 16, 0.06);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: rgba(44, 24, 16, 0.3);
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  /* ============================================
+     NEWSLETTER SECTION
+     Inspirado en: The Africa Center newsletter
+  ============================================ */
+  .newsletter {
+    padding: 5rem 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .newsletter h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.75rem;
+  }
+
+  .newsletter p {
+    color: rgba(44, 24, 16, 0.5);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 1.5px solid rgba(44, 24, 16, 0.15);
+    border-radius: 50px;
+    background: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: var(--deep-brown);
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .newsletter-form input:focus {
+    border-color: var(--gold);
+  }
+
+  .newsletter-form input::placeholder {
+    color: rgba(44, 24, 16, 0.3);
+  }
+
+  .newsletter-form button {
+    background: var(--deep-brown);
+    color: var(--cream);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .newsletter-form button:hover {
+    background: var(--earth-red);
+    transform: translateY(-2px);
+  }
+
+  /* ============================================
+     FOOTER
+     Inspirado en: NAACP, ADN footers
+  ============================================ */
+  footer {
+    background: var(--warm-black);
+    padding: 5rem 3rem 2rem;
+    color: var(--cream);
+  }
+
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(245, 237, 224, 0.08);
+  }
+
+  .footer-brand {
+    max-width: 350px;
+  }
+
+  .footer-brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.9rem;
+    color: rgba(245, 237, 224, 0.4);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .footer-social a {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(245, 237, 224, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--warm-black);
+  }
+
+  .footer-col h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+  }
+
+  .footer-col a {
+    display: block;
+    color: rgba(245, 237, 224, 0.5);
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 0.8rem;
+    transition: color 0.3s ease;
+    font-weight: 300;
+  }
+
+  .footer-col a:hover {
+    color: var(--cream);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    font-size: 0.78rem;
+    color: rgba(245, 237, 224, 0.25);
+  }
+
+  .footer-bottom a {
+    color: rgba(245, 237, 224, 0.25);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-bottom a:hover {
+    color: var(--gold);
+  }
+
+  /* ============================================
+     UI NOTES OVERLAY (Design Reference)
+  ============================================ */
+  .ui-note {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(0,0,0,0.85);
+    color: #0f0;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    z-index: 9999;
+    max-width: 280px;
+    line-height: 1.5;
+    border: 1px solid rgba(0,255,0,0.2);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.3s ease;
+  }
+
+  .ui-note-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10000;
+    background: rgba(0,0,0,0.85);
+    color: #0f0;
+    border: 1px solid rgba(0,255,0,0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+
+  .ui-note.hidden { opacity: 0; pointer-events: none; }
+
+  /* ============================================
+     RESPONSIVE
+  ============================================ */
+  @media (max-width: 1024px) {
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .programs-grid { grid-template-columns: 1fr 1fr; }
+    .news-grid { grid-template-columns: 1fr 1fr; }
+    .news-card:first-child { grid-column: span 2; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .hero h1 { font-size: 2.5rem; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .programs-grid { grid-template-columns: 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .news-card:first-child { grid-column: span 1; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .newsletter-form { flex-direction: column; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .map-section { padding: 5rem 1.5rem 3rem; }
+    .map-section-header { flex-direction: column; align-items: flex-start; }
+    .map-stats-bar { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================
+     MAP SECTION STYLES
+  ============================================ */
+  .map-section {
+    padding: 8rem 3rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .map-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .map-section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    color: var(--deep-brown);
+    line-height: 1.15;
+  }
+
+  .map-section-header p {
+    color: rgba(44, 24, 16, 0.5);
+    font-size: 1rem;
+    font-weight: 300;
+    margin-top: 0.5rem;
+    max-width: 500px;
+  }
+
+  .map-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .map-filter-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    border: 1.5px solid rgba(44, 24, 16, 0.12);
+    background: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--deep-brown);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .map-filter-btn:hover,
+  .map-filter-btn.active {
+    background: var(--deep-brown);
+    color: var(--cream);
+    border-color: var(--deep-brown);
+  }
+
+  .map-container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(44, 24, 16, 0.08);
+    box-shadow: 0 10px 40px rgba(44, 24, 16, 0.08);
+    height: 600px;
+    background: white;
+  }
+
+  #mapBogota {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .map-sidebar {
+    background: white;
+    border-left: 1px solid rgba(44, 24, 16, 0.06);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .map-sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(44, 24, 16, 0.06);
+  }
+
+  .map-sidebar-tabs {
+    display: flex;
+    background: rgba(44, 24, 16, 0.03);
+    border-radius: 10px;
+    padding: 3px;
+  }
+
+  .map-tab {
+    flex: 1;
+    padding: 0.6rem;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(44, 24, 16, 0.5);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .map-tab.active {
+    background: white;
+    color: var(--deep-brown);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    font-weight: 600;
+  }
+
+  .map-search {
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  .map-search input {
+    width: 100%;
+    padding: 0.7rem 1rem 0.7rem 2.5rem;
+    border: 1.5px solid rgba(44, 24, 16, 0.1);
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    background: white;
+    color: var(--deep-brown);
+    transition: border-color 0.3s ease;
+  }
+
+  .map-search input:focus { border-color: var(--gold); }
+
+  .map-search-icon {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    opacity: 0.3;
+  }
+
+  .map-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.75rem;
+  }
+
+  .map-list::-webkit-scrollbar { width: 4px; }
+  .map-list::-webkit-scrollbar-thumb { background: rgba(44,24,16,0.1); border-radius: 4px; }
+
+  .map-list-item {
+    display: flex;
+    gap: 0.85rem;
+    padding: 0.85rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+
+  .map-list-item:hover,
+  .map-list-item.active {
+    background: rgba(212, 168, 83, 0.06);
+    border-color: rgba(212, 168, 83, 0.15);
+  }
+
+  .map-list-item-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--cream);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .map-list-item-info h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--deep-brown);
+    margin-bottom: 0.15rem;
+  }
+
+  .map-list-item-info p {
+    font-size: 0.72rem;
+    color: rgba(44, 24, 16, 0.45);
+    line-height: 1.4;
+  }
+
+  .map-list-item-badge {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-top: 0.3rem;
+    display: inline-block;
+  }
+
+  .badge-gastronomia { background: #FFF3E0; color: #E65100; }
+  .badge-belleza { background: #F3E5F5; color: #7B1FA2; }
+  .badge-artesanias { background: #E8F5E9; color: #2E7D32; }
+  .badge-cultura { background: #E3F2FD; color: #1565C0; }
+  .badge-moda { background: #FFF8E1; color: #F57F17; }
+  .badge-servicios { background: #ECEFF1; color: #37474F; }
+
+  .map-add-panel {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(44, 24, 16, 0.06);
+  }
+
+  .map-add-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--gold);
+    color: var(--warm-black);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .map-add-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(212, 168, 83, 0.3);
+  }
+
+  .map-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 18, 16, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 5000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .map-modal-overlay.show { display: flex; }
+
+  .map-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 520px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .map-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: rgba(44, 24, 16, 0.05);
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+
+  .map-modal-close:hover { background: rgba(44, 24, 16, 0.1); }
+
+  .map-modal h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--deep-brown);
+    margin-bottom: 0.5rem;
+  }
+
+  .map-modal > p {
+    color: rgba(44, 24, 16, 0.5);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .form-group { margin-bottom: 1.25rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--deep-brown);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1.5px solid rgba(44, 24, 16, 0.12);
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    color: var(--deep-brown);
+    outline: none;
+    transition: border-color 0.3s ease;
+    background: white;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+
+  .form-group textarea { resize: vertical; min-height: 80px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-hint {
+    font-size: 0.7rem;
+    color: rgba(44, 24, 16, 0.35);
+    margin-top: 0.3rem;
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 0.9rem;
+    background: var(--deep-brown);
+    color: var(--cream);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover {
+    background: var(--earth-red);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 58, 47, 0.3);
+  }
+
+  .map-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .map-stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(44, 24, 16, 0.06);
+  }
+
+  .map-stat-card .stat-number { font-size: 2rem; color: var(--earth-red); }
+  .map-stat-card .stat-label { color: rgba(44, 24, 16, 0.5); font-size: 0.75rem; }
+
+  .custom-popup .leaflet-popup-content-wrapper {
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  .custom-popup .leaflet-popup-content { margin: 0; min-width: 240px; }
+
+  .popup-content { padding: 1.2rem; }
+  .popup-content h4 { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--deep-brown); margin-bottom: 0.3rem; }
+  .popup-content p { font-size: 0.78rem; color: rgba(44, 24, 16, 0.5); line-height: 1.5; margin-bottom: 0.25rem; }
+  .popup-badge { display: inline-block; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 50px; font-weight: 600; margin-top: 0.5rem; }
+
+  @media (max-width: 1024px) {
+    .map-container { grid-template-columns: 1fr; height: auto; }
+    #mapBogota { height: 450px; }
+    .map-sidebar { border-left: none; border-top: 1px solid rgba(44,24,16,0.06); max-height: 400px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     NAVIGATION
+========================================== -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">RA</div>
+    <span class="nav-logo-text">Raíces Afro</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#programs">Programas</a></li>
+    <li><a href="#mapa">Mapa</a></li>
+    <li><a href="#news">Noticias</a></li>
+    <li><a href="#team">Equipo</a></li>
+    <li><a href="#contact">Contacto</a></li>
+    <li><a href="#donate" class="nav-cta">Donar</a></li>
+  </ul>
+</nav>
+
+<!-- ==========================================
+     HERO
+========================================== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  
+  <!-- Decorative SVG - Adinkra inspired -->
+  <svg class="hero-deco" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(212,168,83,1)" stroke-width="1.5"/>
+    <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(212,168,83,1)" stroke-width="1"/>
+    <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(212,168,83,1)" stroke-width="0.8"/>
+    <line x1="100" y1="20" x2="100" y2="180" stroke="rgba(212,168,83,1)" stroke-width="0.5"/>
+    <line x1="20" y1="100" x2="180" y2="100" stroke="rgba(212,168,83,1)" stroke-width="0.5"/>
+    <line x1="43" y1="43" x2="157" y2="157" stroke="rgba(212,168,83,1)" stroke-width="0.5"/>
+    <line x1="157" y1="43" x2="43" y2="157" stroke="rgba(212,168,83,1)" stroke-width="0.5"/>
+    <circle cx="100" cy="20" r="4" fill="rgba(212,168,83,1)"/>
+    <circle cx="100" cy="180" r="4" fill="rgba(212,168,83,1)"/>
+    <circle cx="20" cy="100" r="4" fill="rgba(212,168,83,1)"/>
+    <circle cx="180" cy="100" r="4" fill="rgba(212,168,83,1)"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Organización sin ánimo de lucro — Colombia
+    </div>
+    <h1>Honrando nuestras <span>raíces,</span> construyendo <span>futuro</span></h1>
+    <p class="hero-desc">
+      Trabajamos por el empoderamiento, la visibilización y el desarrollo integral de las comunidades afrocolombianas, raizales y palenqueras a través de la educación, la cultura y la incidencia política.
+    </p>
+    <div class="hero-actions">
+      <a href="#programs" class="btn-primary">Conoce Nuestros Programas →</a>
+      <a href="#donate" class="btn-outline">Haz tu Donación</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ==========================================
+     IMPACT STATS
+========================================== -->
+<section class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number">12K+</div>
+    <div class="stat-label">Personas beneficiadas</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">45</div>
+    <div class="stat-label">Comunidades alcanzadas</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">8</div>
+    <div class="stat-label">Departamentos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">15</div>
+    <div class="stat-label">Años de trayectoria</div>
+  </div>
+</section>
+
+<!-- ==========================================
+     ABOUT / MISSION
+========================================== -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-img-main"></div>
+    <div class="about-img-accent">
+      <div class="about-img-accent-text">
+        <span>🌍</span>
+        Desde 2010 transformando vidas
+      </div>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-tag">Quiénes Somos</div>
+    <h2>Una fundación nacida del <span>orgullo</span> y la <span>resistencia</span></h2>
+    <p>
+      Somos una organización sin ánimo de lucro dedicada a promover los derechos humanos, la identidad cultural y el desarrollo socioeconómico de las comunidades negras, afrocolombianas, raizales y palenqueras en Colombia.
+    </p>
+    <p>
+      Nuestra misión es construir puentes entre la herencia ancestral africana y las oportunidades del presente, empoderando a niños, jóvenes y mujeres a través de programas educativos, culturales y productivos.
+    </p>
+    <div class="about-values">
+      <div class="value-item">
+        <div class="value-icon">✊🏿</div>
+        <div>
+          <h4>Identidad</h4>
+          <p>Fortalecimiento de la identidad étnica y cultural</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">📚</div>
+        <div>
+          <h4>Educación</h4>
+          <p>Acceso equitativo a educación de calidad</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">🤝</div>
+        <div>
+          <h4>Comunidad</h4>
+          <p>Tejido social y liderazgo comunitario</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">⚖️</div>
+        <div>
+          <h4>Derechos</h4>
+          <p>Incidencia política y defensa de derechos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     PROGRAMS
+========================================== -->
+<section class="programs" id="programs">
+  <div class="programs-header">
+    <div class="section-tag">Nuestros Programas</div>
+    <h2>Transformando realidades con acciones concretas</h2>
+    <p>Cada programa está diseñado para abordar las necesidades más urgentes de nuestras comunidades y generar un impacto duradero.</p>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="program-icon">🎓</div>
+      <h3>Semillero de Líderes</h3>
+      <p>Formación en liderazgo, derechos humanos e incidencia política para jóvenes afrocolombianos de 14 a 28 años en zonas vulnerables.</p>
+      <a href="#" class="program-link">Conoce más →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">🥁</div>
+      <h3>Cultura Viva</h3>
+      <p>Preservación y difusión de las expresiones artísticas afrocolombianas: música, danza, gastronomía y tradición oral de nuestros pueblos.</p>
+      <a href="#" class="program-link">Conoce más →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">💼</div>
+      <h3>Emprendimiento Afro</h3>
+      <p>Capacitación, acompañamiento y financiamiento para emprendedores afrocolombianos que buscan transformar sus comunidades.</p>
+      <a href="#" class="program-link">Conoce más →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">🏥</div>
+      <h3>Salud y Bienestar</h3>
+      <p>Brigadas de salud, atención psicosocial y programas de medicina tradicional en comunidades con acceso limitado a servicios de salud.</p>
+      <a href="#" class="program-link">Conoce más →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">👩🏿‍💻</div>
+      <h3>Mujeres Afro Digital</h3>
+      <p>Formación en habilidades digitales y tecnológicas para mujeres afrocolombianas, cerrando la brecha digital y de género.</p>
+      <a href="#" class="program-link">Conoce más →</a>
+    </div>
+    <div class="program-card">
+      <div class="program-icon">🌱</div>
+      <h3>Territorio y Ambiente</h3>
+      <p>Defensa del territorio ancestral y proyectos de sostenibilidad ambiental en las regiones del Pacífico y Caribe colombiano.</p>
+      <a href="#" class="program-link">Conoce más →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     CTA / DONATE BANNER
+========================================== -->
+<section class="cta-banner" id="donate">
+  <div class="cta-content">
+    <h2>Tu aporte transforma vidas</h2>
+    <p>Cada donación nos permite llegar a más comunidades, formar más líderes y preservar nuestra herencia cultural. Juntos construimos un Colombia más justa y diversa.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-white">Donar Ahora ❤️</a>
+      <a href="#" class="btn-outline">Ser Voluntario</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     NEWS / BLOG
+========================================== -->
+<section class="news" id="news">
+  <div class="news-header">
+    <div>
+      <div class="section-tag">Noticias y Eventos</div>
+      <h2>Lo último de nuestra fundación</h2>
+    </div>
+    <a href="#">Ver todas las noticias →</a>
+  </div>
+  <div class="news-grid">
+    <div class="news-card">
+      <div class="news-card-img"></div>
+      <div class="news-card-body">
+        <div class="news-card-tag">Evento destacado</div>
+        <h3>Gran Encuentro Nacional de Comunidades Afrocolombianas 2026</h3>
+        <p>Más de 500 líderes comunitarios se reunirán en Cali para discutir los avances y desafíos en materia de política pública étnica.</p>
+        <div class="news-card-meta">
+          <span>15 Mar 2026</span>
+          <span>•</span>
+          <span>Cali, Valle del Cauca</span>
+        </div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-img"></div>
+      <div class="news-card-body">
+        <div class="news-card-tag">Programa</div>
+        <h3>Graduación de la 5ª cohorte del Semillero de Líderes</h3>
+        <p>120 jóvenes completaron su formación en liderazgo comunitario y derechos humanos.</p>
+        <div class="news-card-meta">
+          <span>28 Feb 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-card-img"></div>
+      <div class="news-card-body">
+        <div class="news-card-tag">Alianza</div>
+        <h3>Nueva alianza con la Cooperación Internacional</h3>
+        <p>Firmamos convenio para fortalecer el emprendimiento afro en 3 departamentos.</p>
+        <div class="news-card-meta">
+          <span>10 Feb 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     TEAM
+========================================== -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <div class="team-header">
+      <div class="section-tag">Nuestro Equipo</div>
+      <h2>Las personas detrás del cambio</h2>
+      <p>Un equipo diverso y comprometido con la transformación social de las comunidades afrocolombianas.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-card-img"></div>
+        <h4>María del Carmen Palacios</h4>
+        <p>Directora Ejecutiva</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-img"></div>
+        <h4>Jorge Luis Mosquera</h4>
+        <p>Director de Programas</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-img"></div>
+        <h4>Luz Dary Hinestroza</h4>
+        <p>Coordinadora Cultura Viva</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-img"></div>
+        <h4>Carlos Andrés Caicedo</h4>
+        <p>Coordinador de Educación</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     PARTNERS
+========================================== -->
+<section class="partners">
+  <div class="partners-label">Organizaciones aliadas</div>
+  <div class="partners-logos">
+    <div class="partner-logo">ONU</div>
+    <div class="partner-logo">USAID</div>
+    <div class="partner-logo">MinInterior</div>
+    <div class="partner-logo">SENA</div>
+    <div class="partner-logo">Univ. del Valle</div>
+    <div class="partner-logo">PNUD</div>
+  </div>
+</section>
+
+<!-- ==========================================
+     NEWSLETTER
+========================================== -->
+<section class="map-section" id="mapa">
+  <div class="map-section-header">
+    <div>
+      <div class="section-tag">Directorio Interactivo</div>
+      <h2>Emprendimientos Afro en Bogotá</h2>
+      <p>Descubre y apoya los negocios de la comunidad afrocolombiana en la capital. ¿Tienes un emprendimiento? ¡Regístralo!</p>
+    </div>
+    <div class="map-controls">
+      <button class="map-filter-btn active" onclick="filterMarkers('todos')">Todos</button>
+      <button class="map-filter-btn" onclick="filterMarkers('gastronomia')">🍽️ Gastronomía</button>
+      <button class="map-filter-btn" onclick="filterMarkers('belleza')">💇🏿 Belleza</button>
+      <button class="map-filter-btn" onclick="filterMarkers('artesanias')">🎨 Artesanías</button>
+      <button class="map-filter-btn" onclick="filterMarkers('cultura')">🥁 Cultura</button>
+      <button class="map-filter-btn" onclick="filterMarkers('moda')">👗 Moda</button>
+      <button class="map-filter-btn" onclick="filterMarkers('servicios')">💼 Servicios</button>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <div id="mapBogota"></div>
+    <div class="map-sidebar">
+      <div class="map-sidebar-header">
+        <div class="map-sidebar-tabs">
+          <button class="map-tab active" onclick="switchTab('lista', this)">📍 Directorio</button>
+          <button class="map-tab" onclick="switchTab('recientes', this)">🕐 Recientes</button>
+        </div>
+        <div class="map-search">
+          <span class="map-search-icon">🔍</span>
+          <input type="text" placeholder="Buscar emprendimiento..." id="searchInput" oninput="searchBusiness(this.value)">
+        </div>
+      </div>
+      <div class="map-list" id="businessList"></div>
+      <div class="map-add-panel">
+        <button class="map-add-btn" onclick="openAddModal()">+ Registrar Emprendimiento</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-stats-bar">
+    <div class="map-stat-card">
+      <div class="stat-number" id="totalCount">0</div>
+      <div class="stat-label">Emprendimientos registrados</div>
+    </div>
+    <div class="map-stat-card">
+      <div class="stat-number" id="categoryCount">6</div>
+      <div class="stat-label">Categorías disponibles</div>
+    </div>
+    <div class="map-stat-card">
+      <div class="stat-number" id="localidadCount">0</div>
+      <div class="stat-label">Localidades de Bogotá</div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal para agregar emprendimiento -->
+<div class="map-modal-overlay" id="addModal">
+  <div class="map-modal">
+    <button class="map-modal-close" onclick="closeAddModal()">✕</button>
+    <h3>Registrar Emprendimiento Afro</h3>
+    <p>Completa los datos para que tu negocio aparezca en el directorio de emprendimientos afrocolombianos de Bogotá.</p>
+    <div class="form-group">
+      <label>Nombre del emprendimiento *</label>
+      <input type="text" id="formName" placeholder="Ej: Restaurante Sabor Pacífico">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Categoría *</label>
+        <select id="formCategory">
+          <option value="">Seleccionar...</option>
+          <option value="gastronomia">🍽️ Gastronomía</option>
+          <option value="belleza">💇🏿 Belleza y Estética</option>
+          <option value="artesanias">🎨 Artesanías</option>
+          <option value="cultura">🥁 Cultura y Arte</option>
+          <option value="moda">👗 Moda y Confección</option>
+          <option value="servicios">💼 Servicios Profesionales</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Localidad *</label>
+        <select id="formLocalidad">
+          <option value="">Seleccionar...</option>
+          <option>Usaquén</option><option>Chapinero</option><option>Santa Fe</option>
+          <option>San Cristóbal</option><option>Usme</option><option>Tunjuelito</option>
+          <option>Bosa</option><option>Kennedy</option><option>Fontibón</option>
+          <option>Engativá</option><option>Suba</option><option>Barrios Unidos</option>
+          <option>Teusaquillo</option><option>Los Mártires</option><option>Antonio Nariño</option>
+          <option>Puente Aranda</option><option>La Candelaria</option>
+          <option>Rafael Uribe Uribe</option><option>Ciudad Bolívar</option><option>Sumapaz</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Dirección *</label>
+      <input type="text" id="formAddress" placeholder="Ej: Cra 7 #45-12, Chapinero">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Teléfono / WhatsApp</label>
+        <input type="tel" id="formPhone" placeholder="3XX XXX XXXX">
+      </div>
+      <div class="form-group">
+        <label>Instagram / Red Social</label>
+        <input type="text" id="formSocial" placeholder="@tuemprendimiento">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Descripción breve</label>
+      <textarea id="formDesc" placeholder="Cuéntanos sobre tu emprendimiento..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Ubicación en el mapa</label>
+      <p class="form-hint">💡 Haz clic en el mapa para marcar la ubicación exacta, o déjalo vacío.</p>
+      <div class="form-row" style="margin-top:0.5rem;">
+        <input type="text" id="formLat" placeholder="Latitud" readonly style="background:#f9f7f4;">
+        <input type="text" id="formLng" placeholder="Longitud" readonly style="background:#f9f7f4;">
+      </div>
+    </div>
+    <button class="form-submit" onclick="submitBusiness()">Registrar Emprendimiento →</button>
+  </div>
+</div>
+
+<!-- ==========================================
+     NEWSLETTER (original)
+========================================== -->
+<section class="newsletter" id="contact">
+  <h3>Mantente informado</h3>
+  <p>Suscríbete a nuestro boletín para recibir noticias, eventos y oportunidades directamente en tu correo.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="tu@correo.com">
+    <button>Suscribirse</button>
+  </div>
+</section>
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <div class="nav-logo-icon">RA</div>
+          <span class="nav-logo-text">Raíces Afro</span>
+        </div>
+        <p>Fundación sin ánimo de lucro dedicada al empoderamiento y desarrollo de las comunidades afrocolombianas, raizales y palenqueras.</p>
+        <div class="footer-social">
+          <a href="#">Fb</a>
+          <a href="#">Ig</a>
+          <a href="#">Tw</a>
+          <a href="#">Yt</a>
+          <a href="#">Tk</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Fundación</h4>
+        <a href="#">Quiénes somos</a>
+        <a href="#">Misión y Visión</a>
+        <a href="#">Equipo</a>
+        <a href="#">Transparencia</a>
+        <a href="#">Informes anuales</a>
+      </div>
+      <div class="footer-col">
+        <h4>Programas</h4>
+        <a href="#">Semillero de Líderes</a>
+        <a href="#">Cultura Viva</a>
+        <a href="#">Emprendimiento Afro</a>
+        <a href="#">Mujeres Afro Digital</a>
+        <a href="#">Territorio y Ambiente</a>
+      </div>
+      <div class="footer-col">
+        <h4>Participa</h4>
+        <a href="#">Donar</a>
+        <a href="#">Voluntariado</a>
+        <a href="#">Alianzas</a>
+        <a href="#">Eventos</a>
+        <a href="#">Contacto</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Fundación Raíces Afro. Todos los derechos reservados. NIT: 000.000.000-0</span>
+      <div>
+        <a href="#">Política de Privacidad</a> · <a href="#">Términos de Uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     DESIGN NOTES PANEL
+========================================== -->
+<button class="ui-note-toggle" onclick="toggleNotes()">📐 Notas UI</button>
+<div class="ui-note" id="uiNotes">
+  <strong>🎨 UI PROTOTYPE — NOTAS DE DISEÑO</strong><br><br>
+  <strong>Tipografía:</strong><br>
+  • Display: DM Serif Display<br>
+  • Body: Outfit (300, 400, 500, 600, 700)<br><br>
+  <strong>Paleta de colores:</strong><br>
+  • Gold: #D4A853 (Dorado principal)<br>
+  • Deep Brown: #2C1810<br>
+  • Earth Red: #8B3A2F<br>
+  • Cream: #F5EDE0<br>
+  • Sage: #5C6B4F<br>
+  • Orange: #D97B2F<br><br>
+  <strong>Inspiraciones:</strong><br>
+  • African Diaspora Network<br>
+  • The Africa Center NYC<br>
+  • NAACP<br>
+  • C.N.O.A. Colombia<br><br>
+  <strong>Breakpoints:</strong><br>
+  • Desktop: 1400px max<br>
+  • Tablet: 1024px<br>
+  • Mobile: 768px<br><br>
+  <em>Reemplazar placeholders con imágenes reales, logos y contenido de la fundación.</em>
+</div>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    if (window.scrollY > 100) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Toggle design notes
+  function toggleNotes() {
+    document.getElementById('uiNotes').classList.toggle('hidden');
+  }
+
+  // Animate stats on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fadeUp 0.6s ease forwards';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.stat-item, .program-card, .news-card, .team-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    observer.observe(el);
+  });
+</script>
+
+<script>
+  // ============================================
+  // MAP: EMPRENDIMIENTOS AFRO EN BOGOTÁ
+  // ============================================
+  let businesses = [
+    { id:1, name:"Restaurante Sabor Pacífico", category:"gastronomia", icon:"🍽️", address:"Cra 7 #45-12, Chapinero", localidad:"Chapinero", phone:"310 456 7890", social:"@saborpacifico", desc:"Cocina tradicional del Pacífico colombiano. Encocados, ceviches y pescados con recetas ancestrales de Tumaco.", lat:4.6351, lng:-74.0633 },
+    { id:2, name:"Trenzas & Raíces", category:"belleza", icon:"💇🏿", address:"Cl 53 #13-42, Chapinero", localidad:"Chapinero", phone:"315 678 2345", social:"@trenzasyraices", desc:"Peluquería afro especializada en trenzas, locks, crochet braids y cuidado del cabello afro natural.", lat:4.6428, lng:-74.0650 },
+    { id:3, name:"Artesanías del Chocó", category:"artesanias", icon:"🎨", address:"Cra 3 #12-15, La Candelaria", localidad:"La Candelaria", phone:"320 123 4567", social:"@artesaniaschoco", desc:"Tejidos en werregue, tagua, coco y fibras naturales elaboradas por artesanas chocoanas.", lat:4.5960, lng:-74.0720 },
+    { id:4, name:"Casa Cultural Kilombo", category:"cultura", icon:"🥁", address:"Cl 19 #4-88, La Candelaria", localidad:"La Candelaria", phone:"318 900 1234", social:"@casakilombo", desc:"Centro cultural con clases de marimba, currulao, salsa y danza afrocolombiana.", lat:4.5985, lng:-74.0690 },
+    { id:5, name:"Afro Wear Bogotá", category:"moda", icon:"👗", address:"Cra 15 #85-20, Usaquén", localidad:"Usaquén", phone:"312 567 8901", social:"@afrowearbta", desc:"Moda afro urbana con estampados de telas wax africanas, turbantes y accesorios con identidad.", lat:4.6952, lng:-74.0328 },
+    { id:6, name:"La Cocina de Doña Petrona", category:"gastronomia", icon:"🍽️", address:"Cl 72 #10-34, Barrios Unidos", localidad:"Barrios Unidos", phone:"314 234 5678", social:"@donapetronacocina", desc:"Almuerzos ejecutivos con sazón del Pacífico. Arroz atollado, tapao y jugos de borojó.", lat:4.6645, lng:-74.0635 },
+    { id:7, name:"Estudio Cimarrón", category:"cultura", icon:"🥁", address:"Cra 24 #53-30, Teusaquillo", localidad:"Teusaquillo", phone:"316 789 0123", social:"@estudiocimarron", desc:"Escuela de música y producción audiovisual afrocolombiana. Talleres de percusión y rap.", lat:4.6355, lng:-74.0780 },
+    { id:8, name:"ConsultAfro", category:"servicios", icon:"💼", address:"Cl 100 #19-61, Usaquén", localidad:"Usaquén", phone:"311 345 6789", social:"@consultafro", desc:"Consultoría en enfoque diferencial étnico, política pública y gestión de proyectos para organizaciones afro.", lat:4.6888, lng:-74.0442 },
+    { id:9, name:"Sabor Buenaventura Express", category:"gastronomia", icon:"🍽️", address:"Cra 80 #38-50, Kennedy", localidad:"Kennedy", phone:"313 456 7890", social:"@saborbuenaventura", desc:"Comida rápida con sabor del Pacífico. Empanadas de camarón, aborrajados y cholados.", lat:4.6253, lng:-74.1398 },
+    { id:10, name:"Afro Natural Cosmética", category:"belleza", icon:"💇🏿", address:"Cl 140 #12-50, Suba", localidad:"Suba", phone:"317 890 1234", social:"@afronaturalco", desc:"Productos capilares naturales para cabello afro. Cremas, aceites y tratamientos del Pacífico.", lat:4.7285, lng:-74.0520 },
+    { id:11, name:"Taller Pacífico Textil", category:"moda", icon:"👗", address:"Cl 6 #3-20, Los Mártires", localidad:"Los Mártires", phone:"319 012 3456", social:"@pacificotextil", desc:"Confección artesanal con identidad étnica. Estampados con simbología afro y bordados a mano.", lat:4.6050, lng:-74.0870 },
+    { id:12, name:"Joyería Ancestral Ébano", category:"artesanias", icon:"🎨", address:"Cra 11 #93-52, Usaquén", localidad:"Usaquén", phone:"322 345 6789", social:"@joyeriaebano", desc:"Joyería artesanal en plata, semillas y materiales naturales inspirada en la cosmogonía africana.", lat:4.6825, lng:-74.0395 }
+  ];
+
+  let map, markers = [], activeFilter = 'todos', tempMarker = null, isAddingLocation = false;
+
+  const categoryColors = { gastronomia:'#E65100', belleza:'#7B1FA2', artesanias:'#2E7D32', cultura:'#1565C0', moda:'#F57F17', servicios:'#37474F' };
+  const categoryLabels = { gastronomia:'Gastronomía', belleza:'Belleza', artesanias:'Artesanías', cultura:'Cultura', moda:'Moda', servicios:'Servicios' };
+
+  function createMarkerIcon(category) {
+    const color = categoryColors[category] || '#D4A853';
+    return L.divIcon({
+      html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 44" width="32" height="44"><path d="M16 0C7.16 0 0 7.16 0 16c0 12 16 28 16 28s16-16 16-28C32 7.16 24.84 0 16 0z" fill="${color}"/><circle cx="16" cy="15" r="7" fill="white" opacity="0.9"/><circle cx="16" cy="15" r="3" fill="${color}"/></svg>`,
+      iconSize: [32, 44], iconAnchor: [16, 44], popupAnchor: [0, -44], className: ''
+    });
+  }
+
+  function initMap() {
+    map = L.map('mapBogota', { center: [4.6486, -74.0628], zoom: 12, zoomControl: false });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>', maxZoom: 19
+    }).addTo(map);
+    L.control.zoom({ position: 'topright' }).addTo(map);
+    map.on('click', function(e) {
+      if (isAddingLocation) {
+        document.getElementById('formLat').value = e.latlng.lat.toFixed(6);
+        document.getElementById('formLng').value = e.latlng.lng.toFixed(6);
+        if (tempMarker) map.removeLayer(tempMarker);
+        tempMarker = L.marker(e.latlng, { icon: createMarkerIcon('servicios') }).addTo(map);
+      }
+    });
+    renderMarkers(); renderList(businesses); updateStats();
+  }
+
+  function renderMarkers() {
+    markers.forEach(m => map.removeLayer(m)); markers = [];
+    const filtered = activeFilter === 'todos' ? businesses : businesses.filter(b => b.category === activeFilter);
+    filtered.forEach(b => {
+      const marker = L.marker([b.lat, b.lng], { icon: createMarkerIcon(b.category) }).addTo(map);
+      marker.bindPopup(`<div class="popup-content"><h4>${b.icon} ${b.name}</h4><p>${b.desc}</p><p>📍 ${b.address}</p>${b.phone?`<p>📱 ${b.phone}</p>`:''}${b.social?`<p>📸 ${b.social}</p>`:''}<span class="popup-badge badge-${b.category}">${categoryLabels[b.category]}</span></div>`, { className: 'custom-popup', maxWidth: 280 });
+      marker._businessId = b.id; markers.push(marker);
+    });
+  }
+
+  function renderList(list) {
+    const c = document.getElementById('businessList');
+    if (!list.length) { c.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(44,24,16,0.3);font-size:0.85rem;">No se encontraron resultados</div>'; return; }
+    c.innerHTML = list.map(b => `<div class="map-list-item" onclick="focusBusiness(${b.id})" data-id="${b.id}"><div class="map-list-item-icon">${b.icon}</div><div class="map-list-item-info"><h4>${b.name}</h4><p>📍 ${b.address}</p><span class="map-list-item-badge badge-${b.category}">${categoryLabels[b.category]}</span></div></div>`).join('');
+  }
+
+  function focusBusiness(id) {
+    const biz = businesses.find(b => b.id === id);
+    if (!biz) return;
+    map.flyTo([biz.lat, biz.lng], 16, { duration: 0.8 });
+    const marker = markers.find(m => m._businessId === id);
+    if (marker) setTimeout(() => marker.openPopup(), 800);
+    document.querySelectorAll('.map-list-item').forEach(el => el.classList.remove('active'));
+    const item = document.querySelector(`[data-id="${id}"]`);
+    if (item) { item.classList.add('active'); item.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
+  }
+
+  function filterMarkers(category) {
+    activeFilter = category;
+    document.querySelectorAll('.map-filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    renderMarkers();
+    const filtered = category === 'todos' ? businesses : businesses.filter(b => b.category === category);
+    renderList(filtered);
+    if (filtered.length && markers.length) { map.fitBounds(L.featureGroup(markers).getBounds().pad(0.15), { duration: 0.8 }); }
+  }
+
+  function searchBusiness(query) {
+    const q = query.toLowerCase().trim();
+    renderList(businesses.filter(b => b.name.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q) || b.address.toLowerCase().includes(q) || b.localidad.toLowerCase().includes(q)));
+  }
+
+  function switchTab(tab, el) {
+    document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('active')); el.classList.add('active');
+    if (tab === 'recientes') renderList([...businesses].sort((a,b) => b.id - a.id));
+    else { const f = activeFilter === 'todos' ? businesses : businesses.filter(b => b.category === activeFilter); renderList(f); }
+  }
+
+  function openAddModal() { document.getElementById('addModal').classList.add('show'); isAddingLocation = true; }
+
+  function closeAddModal() {
+    document.getElementById('addModal').classList.remove('show'); isAddingLocation = false;
+    if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
+    ['formName','formCategory','formLocalidad','formAddress','formPhone','formSocial','formDesc','formLat','formLng'].forEach(id => document.getElementById(id).value = '');
+  }
+
+  function submitBusiness() {
+    const name = document.getElementById('formName').value.trim();
+    const category = document.getElementById('formCategory').value;
+    const localidad = document.getElementById('formLocalidad').value;
+    const address = document.getElementById('formAddress').value.trim();
+    if (!name || !category || !localidad || !address) { alert('Por favor completa los campos obligatorios (*)'); return; }
+    const icons = { gastronomia:'🍽️', belleza:'💇🏿', artesanias:'🎨', cultura:'🥁', moda:'👗', servicios:'💼' };
+    const defaultCoords = { 'Usaquén':[4.695,-74.033], 'Chapinero':[4.645,-74.062], 'Santa Fe':[4.600,-74.072], 'San Cristóbal':[4.570,-74.088], 'Usme':[4.485,-74.126], 'Tunjuelito':[4.576,-74.132], 'Bosa':[4.618,-74.183], 'Kennedy':[4.625,-74.140], 'Fontibón':[4.672,-74.140], 'Engativá':[4.698,-74.108], 'Suba':[4.742,-74.083], 'Barrios Unidos':[4.665,-74.068], 'Teusaquillo':[4.636,-74.082], 'Los Mártires':[4.605,-74.087], 'Antonio Nariño':[4.587,-74.098], 'Puente Aranda':[4.618,-74.108], 'La Candelaria':[4.596,-74.073], 'Rafael Uribe Uribe':[4.564,-74.112], 'Ciudad Bolívar':[4.522,-74.153], 'Sumapaz':[4.320,-74.210] };
+    const lat = parseFloat(document.getElementById('formLat').value) || (defaultCoords[localidad]?defaultCoords[localidad][0]:4.6486);
+    const lng = parseFloat(document.getElementById('formLng').value) || (defaultCoords[localidad]?defaultCoords[localidad][1]:-74.0628);
+    const newBiz = { id:Date.now(), name, category, icon:icons[category], address, localidad, phone:document.getElementById('formPhone').value.trim(), social:document.getElementById('formSocial').value.trim(), desc:document.getElementById('formDesc').value.trim()||'Emprendimiento afrocolombiano en Bogotá.', lat, lng };
+    businesses.push(newBiz); closeAddModal(); renderMarkers();
+    renderList(activeFilter==='todos'?businesses:businesses.filter(b=>b.category===activeFilter));
+    updateStats(); setTimeout(()=>focusBusiness(newBiz.id),300);
+  }
+
+  function updateStats() {
+    document.getElementById('totalCount').textContent = businesses.length;
+    document.getElementById('localidadCount').textContent = new Set(businesses.map(b => b.localidad)).size;
+  }
+
+  window.addEventListener('load', () => { if (typeof L !== 'undefined') initMap(); });
+</script>
+
+</body>
+</html>
