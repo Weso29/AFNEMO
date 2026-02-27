@@ -24,22 +24,14 @@
     --accent-orange: #D97B2F;
     --overlay: rgba(26, 18, 16, 0.7);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'Outfit', sans-serif;
     background: var(--cream);
     color: var(--text-dark);
     overflow-x: hidden;
   }
-
-  /* ============================================
-     NAVIGATION
-     Inspirado en: The Africa Center, NAACP
-  ============================================ */
   nav {
     position: fixed;
     top: 0;
@@ -52,19 +44,16 @@
     transition: all 0.4s ease;
     background: transparent;
   }
-
   nav.scrolled {
     background: var(--warm-black);
     padding: 0.7rem 3rem;
     box-shadow: 0 4px 30px rgba(0,0,0,0.3);
   }
-
   .nav-logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
   }
-
   .nav-logo-icon {
     background: var(--gold) !important;
     color: var(--warm-black) !important;
@@ -74,21 +63,18 @@
     letter-spacing: 0.05em !important;
     transition: all 0.3s ease;
   }
-
   .nav-logo-text {
     font-family: 'DM Serif Display', serif;
     font-size: 1.3rem;
     color: var(--text-light);
     letter-spacing: 0.02em;
   }
-
   .nav-links {
     display: flex;
     gap: 2rem;
     list-style: none;
     align-items: center;
   }
-
   .nav-links a {
     color: var(--cream);
     text-decoration: none;
@@ -99,7 +85,6 @@
     position: relative;
     padding-bottom: 4px;
   }
-
   .nav-links a::after {
     content: '';
     position: absolute;
@@ -110,11 +95,9 @@
     background: var(--gold);
     transition: width 0.3s ease;
   }
-
   .nav-links a:hover::after {
     width: 100%;
   }
-
   .nav-cta {
     background: var(--gold) !important;
     color: var(--warm-black) !important;
@@ -124,19 +107,11 @@
     letter-spacing: 0.05em !important;
     transition: all 0.3s ease;
   }
-
   .nav-cta:hover {
     background: var(--gold-light) !important;
     transform: translateY(-2px);
   }
-
   .nav-cta::after { display: none !important; }
-
-  /* ============================================
-     HERO SECTION
-     Inspirado en: African Diaspora Network hero
-     con video/imagen de fondo a pantalla completa
-  ============================================ */
   .hero {
     height: 100vh;
     min-height: 700px;
@@ -147,7 +122,6 @@
     padding: 0 3rem 5rem;
     overflow: hidden;
   }
-
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -157,8 +131,6 @@
       url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><defs><pattern id="p" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><circle cx="30" cy="30" r="1.5" fill="rgba(212,168,83,0.08)"/></pattern></defs><rect fill="url(%23p)" width="800" height="800"/></svg>');
     background-size: cover;
   }
-
-  /* Geometric Adinkra-inspired decorative element */
   .hero-deco {
     position: absolute;
     top: 15%;
@@ -168,18 +140,15 @@
     opacity: 0.06;
     animation: floatSlow 12s ease-in-out infinite;
   }
-
   @keyframes floatSlow {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-20px) rotate(5deg); }
   }
-
   .hero-content {
     position: relative;
     z-index: 2;
     max-width: 850px;
   }
-
   .hero-tag {
     display: inline-flex;
     align-items: center;
@@ -196,7 +165,6 @@
     margin-bottom: 1.5rem;
     animation: fadeUp 1s ease 0.3s both;
   }
-
   .hero-tag-dot {
     width: 6px;
     height: 6px;
@@ -204,12 +172,10 @@
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
   }
-
   @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
   }
-
   .hero h1 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2.8rem, 6vw, 5.5rem);
@@ -218,12 +184,10 @@
     margin-bottom: 1.5rem;
     animation: fadeUp 1s ease 0.5s both;
   }
-
   .hero h1 span {
     color: var(--gold);
     font-style: italic;
   }
-
   .hero-desc {
     font-size: 1.15rem;
     color: rgba(245, 237, 224, 0.7);
@@ -233,19 +197,16 @@
     font-weight: 300;
     animation: fadeUp 1s ease 0.7s both;
   }
-
   .hero-actions {
     display: flex;
     gap: 1rem;
     align-items: center;
     animation: fadeUp 1s ease 0.9s both;
   }
-
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -263,13 +224,11 @@
     border: none;
     cursor: pointer;
   }
-
   .btn-primary:hover {
     background: var(--gold-light);
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(212, 168, 83, 0.3);
   }
-
   .btn-outline {
     display: inline-flex;
     align-items: center;
@@ -287,14 +246,11 @@
     transition: all 0.3s ease;
     cursor: pointer;
   }
-
   .btn-outline:hover {
     border-color: var(--gold);
     color: var(--gold);
     transform: translateY(-3px);
   }
-
-  /* Scroll indicator */
   .scroll-indicator {
     position: absolute;
     bottom: 2rem;
@@ -309,25 +265,18 @@
     text-transform: uppercase;
     animation: fadeUp 1s ease 1.2s both;
   }
-
   .scroll-line {
     width: 1px;
     height: 60px;
     background: linear-gradient(to bottom, var(--gold), transparent);
     animation: scrollLine 2s ease-in-out infinite;
   }
-
   @keyframes scrollLine {
     0% { transform: scaleY(0); transform-origin: top; }
     50% { transform: scaleY(1); transform-origin: top; }
     51% { transform-origin: bottom; }
     100% { transform: scaleY(0); transform-origin: bottom; }
   }
-
-  /* ============================================
-     IMPACT STATS BAR
-     Inspirado en: ADN stats section
-  ============================================ */
   .stats-bar {
     background: var(--deep-brown);
     padding: 3rem;
@@ -336,7 +285,6 @@
     gap: 2rem;
     position: relative;
   }
-
   .stats-bar::before {
     content: '';
     position: absolute;
@@ -346,12 +294,10 @@
     height: 3px;
     background: linear-gradient(90deg, var(--gold), var(--earth-red), var(--sage), var(--gold));
   }
-
   .stat-item {
     text-align: center;
     padding: 1rem;
   }
-
   .stat-number {
     font-family: 'DM Serif Display', serif;
     font-size: 3rem;
@@ -359,7 +305,6 @@
     line-height: 1;
     margin-bottom: 0.5rem;
   }
-
   .stat-label {
     font-size: 0.8rem;
     color: rgba(245, 237, 224, 0.6);
@@ -367,11 +312,6 @@
     letter-spacing: 0.1em;
     font-weight: 400;
   }
-
-  /* ============================================
-     ABOUT / MISSION SECTION
-     Inspirado en: The Africa Center, NAACP
-  ============================================ */
   .about {
     padding: 8rem 3rem;
     display: grid;
@@ -381,11 +321,9 @@
     margin: 0 auto;
     align-items: center;
   }
-
   .about-visual {
     position: relative;
   }
-
   .about-img-main {
     width: 100%;
     aspect-ratio: 4/5;
@@ -394,7 +332,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .about-img-main::before {
     content: '📸 Imagen de la comunidad';
     position: absolute;
@@ -406,7 +343,6 @@
     font-size: 0.9rem;
     letter-spacing: 0.05em;
   }
-
   .about-img-accent {
     position: absolute;
     bottom: -2rem;
@@ -420,7 +356,6 @@
     justify-content: center;
     padding: 1.5rem;
   }
-
   .about-img-accent-text {
     font-family: 'DM Serif Display', serif;
     font-size: 1rem;
@@ -428,13 +363,11 @@
     text-align: center;
     line-height: 1.4;
   }
-
   .about-img-accent-text span {
     display: block;
     font-size: 2.5rem;
     margin-bottom: 0.25rem;
   }
-
   .section-tag {
     display: inline-block;
     font-size: 0.75rem;
@@ -446,7 +379,6 @@
     position: relative;
     padding-left: 2rem;
   }
-
   .section-tag::before {
     content: '';
     position: absolute;
@@ -456,7 +388,6 @@
     height: 2px;
     background: var(--earth-red);
   }
-
   .about-content h2 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 3.5vw, 3.2rem);
@@ -464,12 +395,10 @@
     margin-bottom: 1.5rem;
     color: var(--deep-brown);
   }
-
   .about-content h2 span {
     color: var(--earth-red);
     font-style: italic;
   }
-
   .about-content p {
     font-size: 1.05rem;
     line-height: 1.8;
@@ -477,14 +406,12 @@
     margin-bottom: 1.5rem;
     font-weight: 300;
   }
-
   .about-values {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.2rem;
     margin-top: 2rem;
   }
-
   .value-item {
     display: flex;
     align-items: flex-start;
@@ -494,7 +421,6 @@
     border-radius: 10px;
     border: 1px solid rgba(44, 24, 16, 0.06);
   }
-
   .value-icon {
     width: 36px;
     height: 36px;
@@ -506,31 +432,23 @@
     font-size: 1rem;
     flex-shrink: 0;
   }
-
   .value-item h4 {
     font-size: 0.85rem;
     font-weight: 600;
     margin-bottom: 0.2rem;
     color: var(--deep-brown);
   }
-
   .value-item p {
     font-size: 0.78rem !important;
     line-height: 1.5 !important;
     margin-bottom: 0 !important;
   }
-
-  /* ============================================
-     PROGRAMS SECTION
-     Inspirado en: ADN Programs, BAF Accelerator
-  ============================================ */
   .programs {
     background: var(--warm-black);
     padding: 8rem 3rem;
     position: relative;
     overflow: hidden;
   }
-
   .programs::before {
     content: '';
     position: absolute;
@@ -541,21 +459,17 @@
     background: radial-gradient(circle, rgba(212, 168, 83, 0.05), transparent 70%);
     border-radius: 50%;
   }
-
   .programs-header {
     text-align: center;
     max-width: 700px;
     margin: 0 auto 5rem;
   }
-
   .programs-header .section-tag {
     color: var(--gold);
   }
-
   .programs-header .section-tag::before {
     background: var(--gold);
   }
-
   .programs-header h2 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 3.5vw, 3.2rem);
@@ -563,14 +477,12 @@
     line-height: 1.15;
     margin-bottom: 1rem;
   }
-
   .programs-header p {
     color: rgba(245, 237, 224, 0.5);
     font-size: 1.05rem;
     line-height: 1.7;
     font-weight: 300;
   }
-
   .programs-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -578,7 +490,6 @@
     max-width: 1400px;
     margin: 0 auto;
   }
-
   .program-card {
     background: rgba(245, 237, 224, 0.04);
     border: 1px solid rgba(245, 237, 224, 0.08);
@@ -589,7 +500,6 @@
     overflow: hidden;
     cursor: pointer;
   }
-
   .program-card::before {
     content: '';
     position: absolute;
@@ -601,17 +511,14 @@
     transform: scaleX(0);
     transition: transform 0.4s ease;
   }
-
   .program-card:hover::before {
     transform: scaleX(1);
   }
-
   .program-card:hover {
     background: rgba(245, 237, 224, 0.08);
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   }
-
   .program-icon {
     width: 60px;
     height: 60px;
@@ -623,14 +530,12 @@
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
-
   .program-card h3 {
     font-family: 'DM Serif Display', serif;
     font-size: 1.5rem;
     color: var(--cream);
     margin-bottom: 0.75rem;
   }
-
   .program-card p {
     font-size: 0.9rem;
     line-height: 1.7;
@@ -638,7 +543,6 @@
     font-weight: 300;
     margin-bottom: 1.5rem;
   }
-
   .program-link {
     color: var(--gold);
     text-decoration: none;
@@ -651,15 +555,9 @@
     gap: 0.5rem;
     transition: gap 0.3s ease;
   }
-
   .program-link:hover {
     gap: 0.8rem;
   }
-
-  /* ============================================
-     CTA / DONATE BANNER
-     Inspirado en: NAACP donate section
-  ============================================ */
   .cta-banner {
     padding: 6rem 3rem;
     background: 
@@ -668,7 +566,6 @@
     overflow: hidden;
     text-align: center;
   }
-
   .cta-banner::before {
     content: '';
     position: absolute;
@@ -676,14 +573,12 @@
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="k" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M20 0L40 20L20 40L0 20Z" fill="none" stroke="rgba(245,237,224,0.04)" stroke-width="1"/></pattern></defs><rect fill="url(%23k)" width="200" height="200"/></svg>');
     background-size: 40px 40px;
   }
-
   .cta-content {
     position: relative;
     z-index: 2;
     max-width: 700px;
     margin: 0 auto;
   }
-
   .cta-content h2 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 4vw, 3.5rem);
@@ -691,7 +586,6 @@
     margin-bottom: 1rem;
     line-height: 1.1;
   }
-
   .cta-content p {
     color: rgba(245, 237, 224, 0.7);
     font-size: 1.1rem;
@@ -699,14 +593,12 @@
     margin-bottom: 2.5rem;
     font-weight: 300;
   }
-
   .cta-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
   }
-
   .btn-white {
     display: inline-flex;
     align-items: center;
@@ -724,36 +616,27 @@
     border: none;
     cursor: pointer;
   }
-
   .btn-white:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
-
-  /* ============================================
-     NEWS / BLOG SECTION
-     Inspirado en: ADN News, The Africa Center
-  ============================================ */
   .news {
     padding: 8rem 3rem;
     max-width: 1400px;
     margin: 0 auto;
   }
-
   .news-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 4rem;
   }
-
   .news-header h2 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 3.5vw, 3.2rem);
     color: var(--deep-brown);
     line-height: 1.15;
   }
-
   .news-header a {
     color: var(--earth-red);
     text-decoration: none;
@@ -766,15 +649,12 @@
     gap: 0.5rem;
     transition: gap 0.3s ease;
   }
-
   .news-header a:hover { gap: 0.8rem; }
-
   .news-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr;
     gap: 2rem;
   }
-
   .news-card {
     border-radius: 14px;
     overflow: hidden;
@@ -783,12 +663,10 @@
     cursor: pointer;
     border: 1px solid rgba(44, 24, 16, 0.06);
   }
-
   .news-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(44, 24, 16, 0.1);
   }
-
   .news-card-img {
     width: 100%;
     aspect-ratio: 16/10;
@@ -796,11 +674,9 @@
     position: relative;
     overflow: hidden;
   }
-
   .news-card:first-child .news-card-img {
     aspect-ratio: 16/12;
   }
-
   .news-card-img::before {
     content: '📷 Imagen del artículo';
     position: absolute;
@@ -811,11 +687,9 @@
     color: rgba(44, 24, 16, 0.2);
     font-size: 0.85rem;
   }
-
   .news-card-body {
     padding: 1.5rem;
   }
-
   .news-card-tag {
     font-size: 0.7rem;
     font-weight: 600;
@@ -824,7 +698,6 @@
     color: var(--earth-red);
     margin-bottom: 0.75rem;
   }
-
   .news-card-body h3 {
     font-family: 'DM Serif Display', serif;
     font-size: 1.2rem;
@@ -832,18 +705,15 @@
     line-height: 1.3;
     margin-bottom: 0.75rem;
   }
-
   .news-card:first-child .news-card-body h3 {
     font-size: 1.5rem;
   }
-
   .news-card-body p {
     font-size: 0.85rem;
     color: rgba(44, 24, 16, 0.5);
     line-height: 1.6;
     font-weight: 300;
   }
-
   .news-card-meta {
     display: flex;
     align-items: center;
@@ -854,56 +724,43 @@
     font-size: 0.75rem;
     color: rgba(44, 24, 16, 0.4);
   }
-
-  /* ============================================
-     TEAM SECTION
-     Inspirado en: ADN Our Team page
-  ============================================ */
   .team {
     background: var(--cream-dark);
     padding: 8rem 3rem;
   }
-
   .team-inner {
     max-width: 1400px;
     margin: 0 auto;
   }
-
   .team-header {
     text-align: center;
     max-width: 600px;
     margin: 0 auto 4rem;
   }
-
   .team-header h2 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 3.5vw, 3.2rem);
     color: var(--deep-brown);
     margin-bottom: 1rem;
   }
-
   .team-header p {
     color: rgba(44, 24, 16, 0.5);
     font-size: 1rem;
     line-height: 1.7;
     font-weight: 300;
   }
-
   .team-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
   }
-
   .team-card {
     text-align: center;
     cursor: pointer;
   }
-
   .team-card:hover .team-card-img {
     transform: scale(1.05);
   }
-
   .team-card-img {
     width: 100%;
     aspect-ratio: 1;
@@ -914,7 +771,6 @@
     overflow: hidden;
     transition: transform 0.4s ease;
   }
-
   .team-card-img::before {
     content: '👤';
     position: absolute;
@@ -925,30 +781,23 @@
     font-size: 2.5rem;
     opacity: 0.2;
   }
-
   .team-card h4 {
     font-family: 'DM Serif Display', serif;
     font-size: 1.15rem;
     color: var(--deep-brown);
     margin-bottom: 0.3rem;
   }
-
   .team-card p {
     font-size: 0.8rem;
     color: rgba(44, 24, 16, 0.5);
     font-weight: 400;
   }
-
-  /* ============================================
-     PARTNERS / ALLIES SECTION
-  ============================================ */
   .partners {
     padding: 5rem 3rem;
     max-width: 1400px;
     margin: 0 auto;
     text-align: center;
   }
-
   .partners-label {
     font-size: 0.75rem;
     font-weight: 600;
@@ -957,7 +806,6 @@
     color: rgba(44, 24, 16, 0.3);
     margin-bottom: 2.5rem;
   }
-
   .partners-logos {
     display: flex;
     justify-content: center;
@@ -965,7 +813,6 @@
     gap: 4rem;
     flex-wrap: wrap;
   }
-
   .partner-logo {
     width: 120px;
     height: 50px;
@@ -979,38 +826,29 @@
     letter-spacing: 0.05em;
     font-weight: 500;
   }
-
-  /* ============================================
-     NEWSLETTER SECTION
-     Inspirado en: The Africa Center newsletter
-  ============================================ */
   .newsletter {
     padding: 5rem 3rem;
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
   }
-
   .newsletter h3 {
     font-family: 'DM Serif Display', serif;
     font-size: 1.8rem;
     color: var(--deep-brown);
     margin-bottom: 0.75rem;
   }
-
   .newsletter p {
     color: rgba(44, 24, 16, 0.5);
     margin-bottom: 2rem;
     font-weight: 300;
   }
-
   .newsletter-form {
     display: flex;
     gap: 0.75rem;
     max-width: 500px;
     margin: 0 auto;
   }
-
   .newsletter-form input {
     flex: 1;
     padding: 1rem 1.5rem;
@@ -1023,15 +861,12 @@
     outline: none;
     transition: border-color 0.3s ease;
   }
-
   .newsletter-form input:focus {
     border-color: var(--gold);
   }
-
   .newsletter-form input::placeholder {
     color: rgba(44, 24, 16, 0.3);
   }
-
   .newsletter-form button {
     background: var(--deep-brown);
     color: var(--cream);
@@ -1047,27 +882,19 @@
     transition: all 0.3s ease;
     white-space: nowrap;
   }
-
   .newsletter-form button:hover {
     background: var(--earth-red);
     transform: translateY(-2px);
   }
-
-  /* ============================================
-     FOOTER
-     Inspirado en: NAACP, ADN footers
-  ============================================ */
   footer {
     background: var(--warm-black);
     padding: 5rem 3rem 2rem;
     color: var(--cream);
   }
-
   .footer-inner {
     max-width: 1400px;
     margin: 0 auto;
   }
-
   .footer-top {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -1075,18 +902,15 @@
     padding-bottom: 4rem;
     border-bottom: 1px solid rgba(245, 237, 224, 0.08);
   }
-
   .footer-brand {
     max-width: 350px;
   }
-
   .footer-brand-logo {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
   }
-
   .footer-brand p {
     font-size: 0.9rem;
     color: rgba(245, 237, 224, 0.4);
@@ -1094,12 +918,10 @@
     font-weight: 300;
     margin-bottom: 1.5rem;
   }
-
   .footer-social {
     display: flex;
     gap: 0.75rem;
   }
-
   .footer-social a {
     width: 40px;
     height: 40px;
@@ -1113,13 +935,11 @@
     font-size: 0.85rem;
     transition: all 0.3s ease;
   }
-
   .footer-social a:hover {
     background: var(--gold);
     border-color: var(--gold);
     color: var(--warm-black);
   }
-
   .footer-col h4 {
     font-size: 0.8rem;
     font-weight: 600;
@@ -1128,7 +948,6 @@
     margin-bottom: 1.5rem;
     color: var(--gold);
   }
-
   .footer-col a {
     display: block;
     color: rgba(245, 237, 224, 0.5);
@@ -1138,11 +957,9 @@
     transition: color 0.3s ease;
     font-weight: 300;
   }
-
   .footer-col a:hover {
     color: var(--cream);
   }
-
   .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -1151,20 +968,14 @@
     font-size: 0.78rem;
     color: rgba(245, 237, 224, 0.25);
   }
-
   .footer-bottom a {
     color: rgba(245, 237, 224, 0.25);
     text-decoration: none;
     transition: color 0.3s ease;
   }
-
   .footer-bottom a:hover {
     color: var(--gold);
   }
-
-  /* ============================================
-     UI NOTES OVERLAY (Design Reference)
-  ============================================ */
   .ui-note {
     position: fixed;
     top: 1rem;
@@ -1182,7 +993,6 @@
     backdrop-filter: blur(10px);
     transition: opacity 0.3s ease;
   }
-
   .ui-note-toggle {
     position: fixed;
     top: 1rem;
@@ -1198,12 +1008,7 @@
     cursor: pointer;
     backdrop-filter: blur(10px);
   }
-
   .ui-note.hidden { opacity: 0; pointer-events: none; }
-
-  /* ============================================
-     RESPONSIVE
-  ============================================ */
   @media (max-width: 1024px) {
     .about { grid-template-columns: 1fr; gap: 3rem; }
     .programs-grid { grid-template-columns: 1fr 1fr; }
@@ -1212,7 +1017,6 @@
     .team-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-top { grid-template-columns: 1fr 1fr; }
   }
-
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
@@ -1232,16 +1036,11 @@
     .map-stats-bar { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
   }
-
-  /* ============================================
-     MAP SECTION STYLES
-  ============================================ */
   .map-section {
     padding: 8rem 3rem 4rem;
     max-width: 1400px;
     margin: 0 auto;
   }
-
   .map-section-header {
     display: flex;
     justify-content: space-between;
@@ -1250,14 +1049,12 @@
     flex-wrap: wrap;
     gap: 1.5rem;
   }
-
   .map-section-header h2 {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 3.5vw, 3.2rem);
     color: var(--deep-brown);
     line-height: 1.15;
   }
-
   .map-section-header p {
     color: rgba(44, 24, 16, 0.5);
     font-size: 1rem;
@@ -1265,13 +1062,11 @@
     margin-top: 0.5rem;
     max-width: 500px;
   }
-
   .map-controls {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
   }
-
   .map-filter-btn {
     padding: 0.5rem 1.2rem;
     border-radius: 50px;
@@ -1284,14 +1079,12 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-
   .map-filter-btn:hover,
   .map-filter-btn.active {
     background: var(--deep-brown);
     color: var(--cream);
     border-color: var(--deep-brown);
   }
-
   .map-container {
     display: grid;
     grid-template-columns: 1fr 380px;
@@ -1303,13 +1096,11 @@
     height: 600px;
     background: white;
   }
-
   #mapBogota {
     width: 100%;
     height: 100%;
     z-index: 1;
   }
-
   .map-sidebar {
     background: white;
     border-left: 1px solid rgba(44, 24, 16, 0.06);
@@ -1317,19 +1108,16 @@
     flex-direction: column;
     overflow: hidden;
   }
-
   .map-sidebar-header {
     padding: 1.5rem;
     border-bottom: 1px solid rgba(44, 24, 16, 0.06);
   }
-
   .map-sidebar-tabs {
     display: flex;
     background: rgba(44, 24, 16, 0.03);
     border-radius: 10px;
     padding: 3px;
   }
-
   .map-tab {
     flex: 1;
     padding: 0.6rem;
@@ -1344,19 +1132,16 @@
     border-radius: 8px;
     transition: all 0.3s ease;
   }
-
   .map-tab.active {
     background: white;
     color: var(--deep-brown);
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     font-weight: 600;
   }
-
   .map-search {
     margin-top: 1rem;
     position: relative;
   }
-
   .map-search input {
     width: 100%;
     padding: 0.7rem 1rem 0.7rem 2.5rem;
@@ -1369,9 +1154,7 @@
     color: var(--deep-brown);
     transition: border-color 0.3s ease;
   }
-
   .map-search input:focus { border-color: var(--gold); }
-
   .map-search-icon {
     position: absolute;
     left: 0.85rem;
@@ -1380,16 +1163,13 @@
     font-size: 0.85rem;
     opacity: 0.3;
   }
-
   .map-list {
     flex: 1;
     overflow-y: auto;
     padding: 0.75rem;
   }
-
   .map-list::-webkit-scrollbar { width: 4px; }
   .map-list::-webkit-scrollbar-thumb { background: rgba(44,24,16,0.1); border-radius: 4px; }
-
   .map-list-item {
     display: flex;
     gap: 0.85rem;
@@ -1399,13 +1179,11 @@
     transition: all 0.3s ease;
     border: 1px solid transparent;
   }
-
   .map-list-item:hover,
   .map-list-item.active {
     background: rgba(212, 168, 83, 0.06);
     border-color: rgba(212, 168, 83, 0.15);
   }
-
   .map-list-item-icon {
     width: 42px;
     height: 42px;
@@ -1417,20 +1195,17 @@
     font-size: 1.1rem;
     flex-shrink: 0;
   }
-
   .map-list-item-info h4 {
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--deep-brown);
     margin-bottom: 0.15rem;
   }
-
   .map-list-item-info p {
     font-size: 0.72rem;
     color: rgba(44, 24, 16, 0.45);
     line-height: 1.4;
   }
-
   .map-list-item-badge {
     font-size: 0.6rem;
     padding: 0.15rem 0.5rem;
@@ -1439,19 +1214,16 @@
     margin-top: 0.3rem;
     display: inline-block;
   }
-
   .badge-gastronomia { background: #FFF3E0; color: #E65100; }
   .badge-belleza { background: #F3E5F5; color: #7B1FA2; }
   .badge-artesanias { background: #E8F5E9; color: #2E7D32; }
   .badge-cultura { background: #E3F2FD; color: #1565C0; }
   .badge-moda { background: #FFF8E1; color: #F57F17; }
   .badge-servicios { background: #ECEFF1; color: #37474F; }
-
   .map-add-panel {
     padding: 1.5rem;
     border-top: 1px solid rgba(44, 24, 16, 0.06);
   }
-
   .map-add-btn {
     width: 100%;
     padding: 0.75rem;
@@ -1465,13 +1237,11 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-
   .map-add-btn:hover {
     background: var(--gold-light);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(212, 168, 83, 0.3);
   }
-
   .map-modal-overlay {
     display: none;
     position: fixed;
@@ -1483,9 +1253,7 @@
     justify-content: center;
     padding: 2rem;
   }
-
   .map-modal-overlay.show { display: flex; }
-
   .map-modal {
     background: white;
     border-radius: 20px;
@@ -1497,7 +1265,6 @@
     box-shadow: 0 30px 60px rgba(0,0,0,0.3);
     position: relative;
   }
-
   .map-modal-close {
     position: absolute;
     top: 1rem;
@@ -1514,25 +1281,20 @@
     justify-content: center;
     transition: background 0.3s ease;
   }
-
   .map-modal-close:hover { background: rgba(44, 24, 16, 0.1); }
-
   .map-modal h3 {
     font-family: 'DM Serif Display', serif;
     font-size: 1.5rem;
     color: var(--deep-brown);
     margin-bottom: 0.5rem;
   }
-
   .map-modal > p {
     color: rgba(44, 24, 16, 0.5);
     font-size: 0.85rem;
     margin-bottom: 2rem;
     font-weight: 300;
   }
-
   .form-group { margin-bottom: 1.25rem; }
-
   .form-group label {
     display: block;
     font-size: 0.78rem;
@@ -1540,7 +1302,6 @@
     color: var(--deep-brown);
     margin-bottom: 0.4rem;
   }
-
   .form-group input,
   .form-group select,
   .form-group textarea {
@@ -1555,21 +1316,16 @@
     transition: border-color 0.3s ease;
     background: white;
   }
-
   .form-group input:focus,
   .form-group select:focus,
   .form-group textarea:focus { border-color: var(--gold); }
-
   .form-group textarea { resize: vertical; min-height: 80px; }
-
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
   .form-hint {
     font-size: 0.7rem;
     color: rgba(44, 24, 16, 0.35);
     margin-top: 0.3rem;
   }
-
   .form-submit {
     width: 100%;
     padding: 0.9rem;
@@ -1584,20 +1340,17 @@
     transition: all 0.3s ease;
     margin-top: 0.5rem;
   }
-
   .form-submit:hover {
     background: var(--earth-red);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(139, 58, 47, 0.3);
   }
-
   .map-stats-bar {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
     margin-top: 2rem;
   }
-
   .map-stat-card {
     background: white;
     border-radius: 12px;
@@ -1605,33 +1358,255 @@
     text-align: center;
     border: 1px solid rgba(44, 24, 16, 0.06);
   }
-
   .map-stat-card .stat-number { font-size: 2rem; color: var(--earth-red); }
   .map-stat-card .stat-label { color: rgba(44, 24, 16, 0.5); font-size: 0.75rem; }
-
   .custom-popup .leaflet-popup-content-wrapper {
     border-radius: 14px;
     padding: 0;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   }
-
   .custom-popup .leaflet-popup-content { margin: 0; min-width: 240px; }
-
   .popup-content { padding: 1.2rem; }
   .popup-content h4 { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--deep-brown); margin-bottom: 0.3rem; }
   .popup-content p { font-size: 0.78rem; color: rgba(44, 24, 16, 0.5); line-height: 1.5; margin-bottom: 0.25rem; }
   .popup-badge { display: inline-block; font-size: 0.65rem; padding: 0.2rem 0.6rem; border-radius: 50px; font-weight: 600; margin-top: 0.5rem; }
-
   @media (max-width: 1024px) {
     .map-container { grid-template-columns: 1fr; height: auto; }
     #mapBogota { height: 450px; }
     .map-sidebar { border-left: none; border-top: 1px solid rgba(44,24,16,0.06); max-height: 400px; }
   }
+
+  /* ============================================
+     CHATBOT WIDGET — agregado al final, sin tocar nada anterior
+  ============================================ */
+  #chat-bubble {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(212, 168, 83, 0.5);
+    z-index: 9000;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 1.5rem;
+  }
+  #chat-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(212, 168, 83, 0.6);
+  }
+  #chat-window {
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    width: 370px;
+    height: 520px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(26, 18, 16, 0.2);
+    z-index: 8999;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(44, 24, 16, 0.08);
+    animation: slideUp 0.3s ease;
+  }
+  #chat-window.open {
+    display: flex;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  #chat-header {
+    background: var(--deep-brown);
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+  .chat-avatar {
+    width: 38px;
+    height: 38px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .chat-header-info h4 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--cream);
+    margin-bottom: 0.1rem;
+  }
+  .chat-header-info span {
+    font-size: 0.72rem;
+    color: rgba(245, 237, 224, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .chat-online-dot {
+    width: 6px;
+    height: 6px;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  #chat-close {
+    margin-left: auto;
+    background: rgba(245, 237, 224, 0.1);
+    border: none;
+    color: var(--cream);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+  #chat-close:hover { background: rgba(245, 237, 224, 0.2); }
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    background: #faf8f5;
+  }
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: rgba(44,24,16,0.1); border-radius: 4px; }
+  .chat-msg {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-end;
+    max-width: 88%;
+  }
+  .chat-msg.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+  .chat-msg-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--cream-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+  .chat-msg.bot .chat-msg-avatar { background: var(--deep-brown); }
+  .chat-msg-bubble {
+    padding: 0.7rem 1rem;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--deep-brown);
+  }
+  .chat-msg.bot .chat-msg-bubble {
+    background: white;
+    border-bottom-left-radius: 4px;
+    border: 1px solid rgba(44,24,16,0.07);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .chat-msg.user .chat-msg-bubble {
+    background: var(--deep-brown);
+    color: var(--cream);
+    border-bottom-right-radius: 4px;
+  }
+  .chat-typing {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 0.7rem 1rem;
+  }
+  .chat-typing span {
+    width: 7px;
+    height: 7px;
+    background: rgba(44,24,16,0.25);
+    border-radius: 50%;
+    animation: typing 1.2s infinite;
+  }
+  .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-6px); opacity: 1; }
+  }
+  #chat-input-area {
+    padding: 1rem;
+    border-top: 1px solid rgba(44,24,16,0.07);
+    display: flex;
+    gap: 0.6rem;
+    background: white;
+    flex-shrink: 0;
+  }
+  #chat-input {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    border: 1.5px solid rgba(44,24,16,0.12);
+    border-radius: 50px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    color: var(--deep-brown);
+    outline: none;
+    transition: border-color 0.3s ease;
+    background: #faf8f5;
+  }
+  #chat-input:focus { border-color: var(--gold); }
+  #chat-input::placeholder { color: rgba(44,24,16,0.3); }
+  #chat-send {
+    width: 40px;
+    height: 40px;
+    background: var(--gold);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+  #chat-send:hover {
+    background: var(--gold-light);
+    transform: scale(1.1);
+  }
+  #chat-send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+  @media (max-width: 480px) {
+    #chat-window {
+      right: 0.75rem;
+      left: 0.75rem;
+      width: auto;
+      bottom: 5.5rem;
+    }
+    #chat-bubble { right: 1.2rem; bottom: 1.2rem; }
+  }
 </style>
 </head>
 <body>
-
 <!-- ==========================================
      NAVIGATION
 ========================================== -->
@@ -1650,14 +1625,11 @@
     <li><a href="#donate" class="nav-cta">Donar</a></li>
   </ul>
 </nav>
-
 <!-- ==========================================
      HERO
 ========================================== -->
 <section class="hero">
   <div class="hero-bg"></div>
-  
-  <!-- Decorative SVG - Adinkra inspired -->
   <svg class="hero-deco" viewBox="0 0 200 200">
     <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(212,168,83,1)" stroke-width="1.5"/>
     <circle cx="100" cy="100" r="60" fill="none" stroke="rgba(212,168,83,1)" stroke-width="1"/>
@@ -1671,7 +1643,6 @@
     <circle cx="20" cy="100" r="4" fill="rgba(212,168,83,1)"/>
     <circle cx="180" cy="100" r="4" fill="rgba(212,168,83,1)"/>
   </svg>
-
   <div class="hero-content">
     <div class="hero-tag">
       <div class="hero-tag-dot"></div>
@@ -1686,13 +1657,11 @@
       <a href="#donate" class="btn-outline">Haz tu Donación</a>
     </div>
   </div>
-
   <div class="scroll-indicator">
     <span>Scroll</span>
     <div class="scroll-line"></div>
   </div>
 </section>
-
 <!-- ==========================================
      IMPACT STATS
 ========================================== -->
@@ -1714,7 +1683,6 @@
     <div class="stat-label">Años de trayectoria</div>
   </div>
 </section>
-
 <!-- ==========================================
      ABOUT / MISSION
 ========================================== -->
@@ -1769,7 +1737,6 @@
     </div>
   </div>
 </section>
-
 <!-- ==========================================
      PROGRAMS
 ========================================== -->
@@ -1818,7 +1785,6 @@
     </div>
   </div>
 </section>
-
 <!-- ==========================================
      CTA / DONATE BANNER
 ========================================== -->
@@ -1832,7 +1798,6 @@
     </div>
   </div>
 </section>
-
 <!-- ==========================================
      NEWS / BLOG
 ========================================== -->
@@ -1882,7 +1847,6 @@
     </div>
   </div>
 </section>
-
 <!-- ==========================================
      TEAM
 ========================================== -->
@@ -1917,7 +1881,6 @@
     </div>
   </div>
 </section>
-
 <!-- ==========================================
      PARTNERS
 ========================================== -->
@@ -1932,9 +1895,8 @@
     <div class="partner-logo">PNUD</div>
   </div>
 </section>
-
 <!-- ==========================================
-     NEWSLETTER
+     MAPA EMPRENDIMIENTOS
 ========================================== -->
 <section class="map-section" id="mapa">
   <div class="map-section-header">
@@ -1953,7 +1915,6 @@
       <button class="map-filter-btn" onclick="filterMarkers('servicios')">💼 Servicios</button>
     </div>
   </div>
-
   <div class="map-container">
     <div id="mapBogota"></div>
     <div class="map-sidebar">
@@ -1973,7 +1934,6 @@
       </div>
     </div>
   </div>
-
   <div class="map-stats-bar">
     <div class="map-stat-card">
       <div class="stat-number" id="totalCount">0</div>
@@ -1989,7 +1949,6 @@
     </div>
   </div>
 </section>
-
 <!-- Modal para agregar emprendimiento -->
 <div class="map-modal-overlay" id="addModal">
   <div class="map-modal">
@@ -2056,9 +2015,8 @@
     <button class="form-submit" onclick="submitBusiness()">Registrar Emprendimiento →</button>
   </div>
 </div>
-
 <!-- ==========================================
-     NEWSLETTER (original)
+     NEWSLETTER
 ========================================== -->
 <section class="newsletter" id="contact">
   <h3>Mantente informado</h3>
@@ -2068,7 +2026,6 @@
     <button>Suscribirse</button>
   </div>
 </section>
-
 <!-- ==========================================
      FOOTER
 ========================================== -->
@@ -2124,11 +2081,31 @@
 </footer>
 
 <!-- ==========================================
-     DESIGN NOTES PANEL
+     CHATBOT WIDGET — Burbuja flotante con Claude
+     ⚠️ REEMPLAZA LA URL DEL WORKER con la tuya
 ========================================== -->
+<button id="chat-bubble" onclick="toggleChat()" title="¿En qué te ayudamos?">🌍</button>
 
+<div id="chat-window">
+  <div id="chat-header">
+    <div class="chat-avatar">🌍</div>
+    <div class="chat-header-info">
+      <h4>Asistente AFNEMO</h4>
+      <span><span class="chat-online-dot"></span> En línea</span>
+    </div>
+    <button id="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chat-messages"></div>
+  <div id="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." onkeydown="handleKey(event)" />
+    <button id="chat-send" onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<!-- ==========================================
+     SCRIPTS ORIGINALES
+========================================== -->
 <script>
-  // Nav scroll effect
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('mainNav');
     if (window.scrollY > 100) {
@@ -2137,13 +2114,9 @@
       nav.classList.remove('scrolled');
     }
   });
-
-  // Toggle design notes
   function toggleNotes() {
     document.getElementById('uiNotes').classList.toggle('hidden');
   }
-
-  // Animate stats on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -2151,18 +2124,13 @@
       }
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.stat-item, .program-card, .news-card, .team-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     observer.observe(el);
   });
 </script>
-
 <script>
-  // ============================================
-  // MAP: EMPRENDIMIENTOS AFRO EN BOGOTÁ
-  // ============================================
   let businesses = [
     { id:1, name:"Restaurante Sabor Pacífico", category:"gastronomia", icon:"🍽️", address:"Cra 7 #45-12, Chapinero", localidad:"Chapinero", phone:"310 456 7890", social:"@saborpacifico", desc:"Cocina tradicional del Pacífico colombiano. Encocados, ceviches y pescados con recetas ancestrales de Tumaco.", lat:4.6351, lng:-74.0633 },
     { id:2, name:"Trenzas & Raíces", category:"belleza", icon:"💇🏿", address:"Cl 53 #13-42, Chapinero", localidad:"Chapinero", phone:"315 678 2345", social:"@trenzasyraices", desc:"Peluquería afro especializada en trenzas, locks, crochet braids y cuidado del cabello afro natural.", lat:4.6428, lng:-74.0650 },
@@ -2177,12 +2145,9 @@
     { id:11, name:"Taller Pacífico Textil", category:"moda", icon:"👗", address:"Cl 6 #3-20, Los Mártires", localidad:"Los Mártires", phone:"319 012 3456", social:"@pacificotextil", desc:"Confección artesanal con identidad étnica. Estampados con simbología afro y bordados a mano.", lat:4.6050, lng:-74.0870 },
     { id:12, name:"Joyería Ancestral Ébano", category:"artesanias", icon:"🎨", address:"Cra 11 #93-52, Usaquén", localidad:"Usaquén", phone:"322 345 6789", social:"@joyeriaebano", desc:"Joyería artesanal en plata, semillas y materiales naturales inspirada en la cosmogonía africana.", lat:4.6825, lng:-74.0395 }
   ];
-
   let map, markers = [], activeFilter = 'todos', tempMarker = null, isAddingLocation = false;
-
   const categoryColors = { gastronomia:'#E65100', belleza:'#7B1FA2', artesanias:'#2E7D32', cultura:'#1565C0', moda:'#F57F17', servicios:'#37474F' };
   const categoryLabels = { gastronomia:'Gastronomía', belleza:'Belleza', artesanias:'Artesanías', cultura:'Cultura', moda:'Moda', servicios:'Servicios' };
-
   function createMarkerIcon(category) {
     const color = categoryColors[category] || '#D4A853';
     return L.divIcon({
@@ -2190,7 +2155,6 @@
       iconSize: [32, 44], iconAnchor: [16, 44], popupAnchor: [0, -44], className: ''
     });
   }
-
   function initMap() {
     map = L.map('mapBogota', { center: [4.6486, -74.0628], zoom: 12, zoomControl: false });
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -2207,7 +2171,6 @@
     });
     renderMarkers(); renderList(businesses); updateStats();
   }
-
   function renderMarkers() {
     markers.forEach(m => map.removeLayer(m)); markers = [];
     const filtered = activeFilter === 'todos' ? businesses : businesses.filter(b => b.category === activeFilter);
@@ -2217,13 +2180,11 @@
       marker._businessId = b.id; markers.push(marker);
     });
   }
-
   function renderList(list) {
     const c = document.getElementById('businessList');
     if (!list.length) { c.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(44,24,16,0.3);font-size:0.85rem;">No se encontraron resultados</div>'; return; }
     c.innerHTML = list.map(b => `<div class="map-list-item" onclick="focusBusiness(${b.id})" data-id="${b.id}"><div class="map-list-item-icon">${b.icon}</div><div class="map-list-item-info"><h4>${b.name}</h4><p>📍 ${b.address}</p><span class="map-list-item-badge badge-${b.category}">${categoryLabels[b.category]}</span></div></div>`).join('');
   }
-
   function focusBusiness(id) {
     const biz = businesses.find(b => b.id === id);
     if (!biz) return;
@@ -2234,7 +2195,6 @@
     const item = document.querySelector(`[data-id="${id}"]`);
     if (item) { item.classList.add('active'); item.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
   }
-
   function filterMarkers(category) {
     activeFilter = category;
     document.querySelectorAll('.map-filter-btn').forEach(btn => btn.classList.remove('active'));
@@ -2244,26 +2204,21 @@
     renderList(filtered);
     if (filtered.length && markers.length) { map.fitBounds(L.featureGroup(markers).getBounds().pad(0.15), { duration: 0.8 }); }
   }
-
   function searchBusiness(query) {
     const q = query.toLowerCase().trim();
     renderList(businesses.filter(b => b.name.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q) || b.address.toLowerCase().includes(q) || b.localidad.toLowerCase().includes(q)));
   }
-
   function switchTab(tab, el) {
     document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('active')); el.classList.add('active');
     if (tab === 'recientes') renderList([...businesses].sort((a,b) => b.id - a.id));
     else { const f = activeFilter === 'todos' ? businesses : businesses.filter(b => b.category === activeFilter); renderList(f); }
   }
-
   function openAddModal() { document.getElementById('addModal').classList.add('show'); isAddingLocation = true; }
-
   function closeAddModal() {
     document.getElementById('addModal').classList.remove('show'); isAddingLocation = false;
     if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
     ['formName','formCategory','formLocalidad','formAddress','formPhone','formSocial','formDesc','formLat','formLng'].forEach(id => document.getElementById(id).value = '');
   }
-
   function submitBusiness() {
     const name = document.getElementById('formName').value.trim();
     const category = document.getElementById('formCategory').value;
@@ -2279,18 +2234,129 @@
     renderList(activeFilter==='todos'?businesses:businesses.filter(b=>b.category===activeFilter));
     updateStats(); setTimeout(()=>focusBusiness(newBiz.id),300);
   }
-
   function updateStats() {
     document.getElementById('totalCount').textContent = businesses.length;
     document.getElementById('localidadCount').textContent = new Set(businesses.map(b => b.localidad)).size;
   }
-
   window.addEventListener('load', () => { if (typeof L !== 'undefined') initMap(); });
 </script>
 
+<!-- ==========================================
+     SCRIPT DEL CHATBOT
+     ⚠️ REEMPLAZA LA URL EN WORKER_URL con la tuya
+========================================== -->
+<script>
+  // ⚠️ CAMBIA ESTA URL por la de tu Worker de Cloudflare
+  const WORKER_URL = 'https://summer-wildflower-8156.santiagopazbe doya.workers.dev';
+
+  const SYSTEM_PROMPT = `Eres el asistente virtual de AFNEMO (Asociación Afrocultural Neftalí Mosquera), una organización colombiana sin ánimo de lucro dedicada al empoderamiento de las comunidades afrocolombianas, raizales y palenqueras.
+
+Tu nombre es Neftalí. Eres amable, cálido, y hablas en español colombiano. Ayudas a los visitantes del sitio web con información sobre:
+- Los programas de AFNEMO (Semillero de Líderes, Cultura Viva, Emprendimiento Afro, Salud y Bienestar, Mujeres Afro Digital, Territorio y Ambiente)
+- Cómo donar o ser voluntario
+- El directorio de emprendimientos afrocolombianos en Bogotá
+- La misión y valores de la organización
+- Eventos y noticias
+
+Si no sabes algo específico, sé honesto y sugiere que contacten directamente a la organización. Sé conciso: respuestas de máximo 3-4 oraciones salvo que te pidan más detalle.`;
+
+  let chatHistory = [];
+  let chatOpen = false;
+  let welcomeShown = false;
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    const win = document.getElementById('chat-window');
+    win.classList.toggle('open', chatOpen);
+    if (chatOpen && !welcomeShown) {
+      welcomeShown = true;
+      appendMessage('bot', '¡Hola! Soy Neftalí, el asistente virtual de AFNEMO 🌍 ¿En qué te puedo ayudar hoy? Puedo contarte sobre nuestros programas, cómo donar, el directorio de emprendimientos y mucho más.');
+    }
+    if (chatOpen) setTimeout(() => document.getElementById('chat-input').focus(), 100);
+  }
+
+  function appendMessage(role, text) {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = `chat-msg ${role}`;
+    div.innerHTML = `
+      <div class="chat-msg-avatar">${role === 'bot' ? '🌍' : '👤'}</div>
+      <div class="chat-msg-bubble">${text}</div>
+    `;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showTyping() {
+    const msgs = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    div.id = 'typing-indicator';
+    div.innerHTML = `
+      <div class="chat-msg-avatar">🌍</div>
+      <div class="chat-msg-bubble">
+        <div class="chat-typing">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    `;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typing-indicator');
+    if (t) t.remove();
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send');
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    sendBtn.disabled = true;
+    appendMessage('user', text);
+    chatHistory.push({ role: 'user', content: text });
+
+    showTyping();
+
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: chatHistory.slice(-10),
+          system: SYSTEM_PROMPT
+        })
+      });
+
+      const data = await res.json();
+      removeTyping();
+
+      if (data.reply) {
+        appendMessage('bot', data.reply);
+        chatHistory.push({ role: 'assistant', content: data.reply });
+      } else {
+        appendMessage('bot', 'Lo siento, hubo un problema al procesar tu mensaje. Por favor intenta de nuevo.');
+      }
+    } catch (err) {
+      removeTyping();
+      appendMessage('bot', 'Lo siento, no pude conectarme en este momento. Por favor intenta más tarde.');
+    }
+
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  function handleKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }
+</script>
 </body>
 </html>
-
-
-
-
