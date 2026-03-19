@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Asociación AfroCultural Neftalí Mosquera — UI Prototype</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script type="module" src="https://mapas.gobiernobogota.gov.co/waportal/apps/mapviewer/node_modules/@arcgis/embeddable-components/dist/arcgis-embeddable-components/arcgis-embeddable-components.esm.js"></script>
 <style>
   :root {
@@ -1907,7 +1905,6 @@
   <ul class="nav-links">
     <li><a href="#about">Nosotros</a></li>
     <li><a href="#programs">Programas</a></li>
-    <li><a href="#mapa">Mapa</a></li>
     <li><a href="#mapa-institucional">Mapa ArcGIS</a></li>
     <li><a href="#news">Noticias</a></li>
     <li><a href="#team">Equipo</a></li>
@@ -2206,57 +2203,6 @@
 <!-- ==========================================
      MAPA EMPRENDIMIENTOS
 ========================================== -->
-<section class="map-section" id="mapa">
-  <div class="map-section-header">
-    <div>
-      <div class="section-tag">Directorio Interactivo</div>
-      <h2>Emprendimientos Afro en Bogotá</h2>
-      <p>Descubre y apoya los negocios de la comunidad afrocolombiana en la capital. ¿Tienes un emprendimiento? ¡Regístralo!</p>
-    </div>
-    <div class="map-controls">
-      <button class="map-filter-btn active" onclick="filterMarkers('todos')">Todos</button>
-      <button class="map-filter-btn" onclick="filterMarkers('gastronomia')">🍽️ Gastronomía</button>
-      <button class="map-filter-btn" onclick="filterMarkers('belleza')">💇🏿 Belleza</button>
-      <button class="map-filter-btn" onclick="filterMarkers('artesanias')">🎨 Artesanías</button>
-      <button class="map-filter-btn" onclick="filterMarkers('cultura')">🥁 Cultura</button>
-      <button class="map-filter-btn" onclick="filterMarkers('moda')">👗 Moda</button>
-      <button class="map-filter-btn" onclick="filterMarkers('servicios')">💼 Servicios</button>
-    </div>
-  </div>
-  <div class="map-container">
-    <div id="mapBogota"></div>
-    <div class="map-sidebar">
-      <div class="map-sidebar-header">
-        <div class="map-sidebar-tabs">
-          <button class="map-tab active" onclick="switchTab('lista', this)">📍 Directorio</button>
-          <button class="map-tab" onclick="switchTab('recientes', this)">🕐 Recientes</button>
-        </div>
-        <div class="map-search">
-          <span class="map-search-icon">🔍</span>
-          <input type="text" placeholder="Buscar emprendimiento..." id="searchInput" oninput="searchBusiness(this.value)">
-        </div>
-      </div>
-      <div class="map-list" id="businessList"></div>
-      <div class="map-add-panel">
-        <button class="map-add-btn" onclick="openAddModal()">+ Registrar Emprendimiento</button>
-      </div>
-    </div>
-  </div>
-  <div class="map-stats-bar">
-    <div class="map-stat-card">
-      <div class="stat-number" id="totalCount">0</div>
-      <div class="stat-label">Emprendimientos registrados</div>
-    </div>
-    <div class="map-stat-card">
-      <div class="stat-number" id="categoryCount">6</div>
-      <div class="stat-label">Categorías disponibles</div>
-    </div>
-    <div class="map-stat-card">
-      <div class="stat-number" id="localidadCount">0</div>
-      <div class="stat-label">Localidades de Bogotá</div>
-    </div>
-  </div>
-</section>
 <!-- ==========================================
      MAPA INSTITUCIONAL ARCGIS
 ========================================== -->
@@ -2275,72 +2221,6 @@
     </iframe>
   </div>
 </section>
-<!-- Modal para agregar emprendimiento -->
-<div class="map-modal-overlay" id="addModal">
-  <div class="map-modal">
-    <button class="map-modal-close" onclick="closeAddModal()">✕</button>
-    <h3>Registrar Emprendimiento Afro</h3>
-    <p>Completa los datos para que tu negocio aparezca en el directorio de emprendimientos afrocolombianos de Bogotá.</p>
-    <div class="form-group">
-      <label>Nombre del emprendimiento *</label>
-      <input type="text" id="formName" placeholder="Ej: Restaurante Sabor Pacífico">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Categoría *</label>
-        <select id="formCategory">
-          <option value="">Seleccionar...</option>
-          <option value="gastronomia">🍽️ Gastronomía</option>
-          <option value="belleza">💇🏿 Belleza y Estética</option>
-          <option value="artesanias">🎨 Artesanías</option>
-          <option value="cultura">🥁 Cultura y Arte</option>
-          <option value="moda">👗 Moda y Confección</option>
-          <option value="servicios">💼 Servicios Profesionales</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Localidad *</label>
-        <select id="formLocalidad">
-          <option value="">Seleccionar...</option>
-          <option>Usaquén</option><option>Chapinero</option><option>Santa Fe</option>
-          <option>San Cristóbal</option><option>Usme</option><option>Tunjuelito</option>
-          <option>Bosa</option><option>Kennedy</option><option>Fontibón</option>
-          <option>Engativá</option><option>Suba</option><option>Barrios Unidos</option>
-          <option>Teusaquillo</option><option>Los Mártires</option><option>Antonio Nariño</option>
-          <option>Puente Aranda</option><option>La Candelaria</option>
-          <option>Rafael Uribe Uribe</option><option>Ciudad Bolívar</option><option>Sumapaz</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Dirección *</label>
-      <input type="text" id="formAddress" placeholder="Ej: Cra 7 #45-12, Chapinero">
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Teléfono / WhatsApp</label>
-        <input type="tel" id="formPhone" placeholder="3XX XXX XXXX">
-      </div>
-      <div class="form-group">
-        <label>Instagram / Red Social</label>
-        <input type="text" id="formSocial" placeholder="@tuemprendimiento">
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Descripción breve</label>
-      <textarea id="formDesc" placeholder="Cuéntanos sobre tu emprendimiento..."></textarea>
-    </div>
-    <div class="form-group">
-      <label>Ubicación en el mapa</label>
-      <p class="form-hint">💡 Haz clic en el mapa para marcar la ubicación exacta, o déjalo vacío.</p>
-      <div class="form-row" style="margin-top:0.5rem;">
-        <input type="text" id="formLat" placeholder="Latitud" readonly style="background:#f9f7f4;">
-        <input type="text" id="formLng" placeholder="Longitud" readonly style="background:#f9f7f4;">
-      </div>
-    </div>
-    <button class="form-submit" onclick="submitBusiness()">Registrar Emprendimiento →</button>
-  </div>
-</div>
 <!-- ==========================================
      NEWSLETTER
 ========================================== -->
@@ -2455,116 +2335,6 @@
     el.style.transform = 'translateY(20px)';
     observer.observe(el);
   });
-</script>
-<script>
-  let businesses = [
-    { id:1, name:"Restaurante Sabor Pacífico", category:"gastronomia", icon:"🍽️", address:"Cra 7 #45-12, Chapinero", localidad:"Chapinero", phone:"310 456 7890", social:"@saborpacifico", desc:"Cocina tradicional del Pacífico colombiano. Encocados, ceviches y pescados con recetas ancestrales de Tumaco.", lat:4.6351, lng:-74.0633 },
-    { id:2, name:"Trenzas & Raíces", category:"belleza", icon:"💇🏿", address:"Cl 53 #13-42, Chapinero", localidad:"Chapinero", phone:"315 678 2345", social:"@trenzasyraices", desc:"Peluquería afro especializada en trenzas, locks, crochet braids y cuidado del cabello afro natural.", lat:4.6428, lng:-74.0650 },
-    { id:3, name:"Artesanías del Chocó", category:"artesanias", icon:"🎨", address:"Cra 3 #12-15, La Candelaria", localidad:"La Candelaria", phone:"320 123 4567", social:"@artesaniaschoco", desc:"Tejidos en werregue, tagua, coco y fibras naturales elaboradas por artesanas chocoanas.", lat:4.5960, lng:-74.0720 },
-    { id:4, name:"Casa Cultural Kilombo", category:"cultura", icon:"🥁", address:"Cl 19 #4-88, La Candelaria", localidad:"La Candelaria", phone:"318 900 1234", social:"@casakilombo", desc:"Centro cultural con clases de marimba, currulao, salsa y danza afrocolombiana.", lat:4.5985, lng:-74.0690 },
-    { id:5, name:"Afro Wear Bogotá", category:"moda", icon:"👗", address:"Cra 15 #85-20, Usaquén", localidad:"Usaquén", phone:"312 567 8901", social:"@afrowearbta", desc:"Moda afro urbana con estampados de telas wax africanas, turbantes y accesorios con identidad.", lat:4.6952, lng:-74.0328 },
-    { id:6, name:"La Cocina de Doña Petrona", category:"gastronomia", icon:"🍽️", address:"Cl 72 #10-34, Barrios Unidos", localidad:"Barrios Unidos", phone:"314 234 5678", social:"@donapetronacocina", desc:"Almuerzos ejecutivos con sazón del Pacífico. Arroz atollado, tapao y jugos de borojó.", lat:4.6645, lng:-74.0635 },
-    { id:7, name:"Estudio Cimarrón", category:"cultura", icon:"🥁", address:"Cra 24 #53-30, Teusaquillo", localidad:"Teusaquillo", phone:"316 789 0123", social:"@estudiocimarron", desc:"Escuela de música y producción audiovisual afrocolombiana. Talleres de percusión y rap.", lat:4.6355, lng:-74.0780 },
-    { id:8, name:"ConsultAfro", category:"servicios", icon:"💼", address:"Cl 100 #19-61, Usaquén", localidad:"Usaquén", phone:"311 345 6789", social:"@consultafro", desc:"Consultoría en enfoque diferencial étnico, política pública y gestión de proyectos para organizaciones afro.", lat:4.6888, lng:-74.0442 },
-    { id:9, name:"Sabor Buenaventura Express", category:"gastronomia", icon:"🍽️", address:"Cra 80 #38-50, Kennedy", localidad:"Kennedy", phone:"313 456 7890", social:"@saborbuenaventura", desc:"Comida rápida con sabor del Pacífico. Empanadas de camarón, aborrajados y cholados.", lat:4.6253, lng:-74.1398 },
-    { id:10, name:"Afro Natural Cosmética", category:"belleza", icon:"💇🏿", address:"Cl 140 #12-50, Suba", localidad:"Suba", phone:"317 890 1234", social:"@afronaturalco", desc:"Productos capilares naturales para cabello afro. Cremas, aceites y tratamientos del Pacífico.", lat:4.7285, lng:-74.0520 },
-    { id:11, name:"Taller Pacífico Textil", category:"moda", icon:"👗", address:"Cl 6 #3-20, Los Mártires", localidad:"Los Mártires", phone:"319 012 3456", social:"@pacificotextil", desc:"Confección artesanal con identidad étnica. Estampados con simbología afro y bordados a mano.", lat:4.6050, lng:-74.0870 },
-    { id:12, name:"Joyería Ancestral Ébano", category:"artesanias", icon:"🎨", address:"Cra 11 #93-52, Usaquén", localidad:"Usaquén", phone:"322 345 6789", social:"@joyeriaebano", desc:"Joyería artesanal en plata, semillas y materiales naturales inspirada en la cosmogonía africana.", lat:4.6825, lng:-74.0395 }
-  ];
-  let map, markers = [], activeFilter = 'todos', tempMarker = null, isAddingLocation = false;
-  const categoryColors = { gastronomia:'#E65100', belleza:'#7B1FA2', artesanias:'#2E7D32', cultura:'#1565C0', moda:'#F57F17', servicios:'#37474F' };
-  const categoryLabels = { gastronomia:'Gastronomía', belleza:'Belleza', artesanias:'Artesanías', cultura:'Cultura', moda:'Moda', servicios:'Servicios' };
-  function createMarkerIcon(category) {
-    const color = categoryColors[category] || '#D4A853';
-    return L.divIcon({
-      html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 44" width="32" height="44"><path d="M16 0C7.16 0 0 7.16 0 16c0 12 16 28 16 28s16-16 16-28C32 7.16 24.84 0 16 0z" fill="${color}"/><circle cx="16" cy="15" r="7" fill="white" opacity="0.9"/><circle cx="16" cy="15" r="3" fill="${color}"/></svg>`,
-      iconSize: [32, 44], iconAnchor: [16, 44], popupAnchor: [0, -44], className: ''
-    });
-  }
-  function initMap() {
-    map = L.map('mapBogota', { center: [4.6486, -74.0628], zoom: 12, zoomControl: false });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>', maxZoom: 19
-    }).addTo(map);
-    L.control.zoom({ position: 'topright' }).addTo(map);
-    map.on('click', function(e) {
-      if (isAddingLocation) {
-        document.getElementById('formLat').value = e.latlng.lat.toFixed(6);
-        document.getElementById('formLng').value = e.latlng.lng.toFixed(6);
-        if (tempMarker) map.removeLayer(tempMarker);
-        tempMarker = L.marker(e.latlng, { icon: createMarkerIcon('servicios') }).addTo(map);
-      }
-    });
-    renderMarkers(); renderList(businesses); updateStats();
-  }
-  function renderMarkers() {
-    markers.forEach(m => map.removeLayer(m)); markers = [];
-    const filtered = activeFilter === 'todos' ? businesses : businesses.filter(b => b.category === activeFilter);
-    filtered.forEach(b => {
-      const marker = L.marker([b.lat, b.lng], { icon: createMarkerIcon(b.category) }).addTo(map);
-      marker.bindPopup(`<div class="popup-content"><h4>${b.icon} ${b.name}</h4><p>${b.desc}</p><p>📍 ${b.address}</p>${b.phone?`<p>📱 ${b.phone}</p>`:''}${b.social?`<p>📸 ${b.social}</p>`:''}<span class="popup-badge badge-${b.category}">${categoryLabels[b.category]}</span></div>`, { className: 'custom-popup', maxWidth: 280 });
-      marker._businessId = b.id; markers.push(marker);
-    });
-  }
-  function renderList(list) {
-    const c = document.getElementById('businessList');
-    if (!list.length) { c.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(44,24,16,0.3);font-size:0.85rem;">No se encontraron resultados</div>'; return; }
-    c.innerHTML = list.map(b => `<div class="map-list-item" onclick="focusBusiness(${b.id})" data-id="${b.id}"><div class="map-list-item-icon">${b.icon}</div><div class="map-list-item-info"><h4>${b.name}</h4><p>📍 ${b.address}</p><span class="map-list-item-badge badge-${b.category}">${categoryLabels[b.category]}</span></div></div>`).join('');
-  }
-  function focusBusiness(id) {
-    const biz = businesses.find(b => b.id === id);
-    if (!biz) return;
-    map.flyTo([biz.lat, biz.lng], 16, { duration: 0.8 });
-    const marker = markers.find(m => m._businessId === id);
-    if (marker) setTimeout(() => marker.openPopup(), 800);
-    document.querySelectorAll('.map-list-item').forEach(el => el.classList.remove('active'));
-    const item = document.querySelector(`[data-id="${id}"]`);
-    if (item) { item.classList.add('active'); item.scrollIntoView({ behavior:'smooth', block:'nearest' }); }
-  }
-  function filterMarkers(category) {
-    activeFilter = category;
-    document.querySelectorAll('.map-filter-btn').forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    renderMarkers();
-    const filtered = category === 'todos' ? businesses : businesses.filter(b => b.category === category);
-    renderList(filtered);
-    if (filtered.length && markers.length) { map.fitBounds(L.featureGroup(markers).getBounds().pad(0.15), { duration: 0.8 }); }
-  }
-  function searchBusiness(query) {
-    const q = query.toLowerCase().trim();
-    renderList(businesses.filter(b => b.name.toLowerCase().includes(q) || b.desc.toLowerCase().includes(q) || b.address.toLowerCase().includes(q) || b.localidad.toLowerCase().includes(q)));
-  }
-  function switchTab(tab, el) {
-    document.querySelectorAll('.map-tab').forEach(t => t.classList.remove('active')); el.classList.add('active');
-    if (tab === 'recientes') renderList([...businesses].sort((a,b) => b.id - a.id));
-    else { const f = activeFilter === 'todos' ? businesses : businesses.filter(b => b.category === activeFilter); renderList(f); }
-  }
-  function openAddModal() { document.getElementById('addModal').classList.add('show'); isAddingLocation = true; }
-  function closeAddModal() {
-    document.getElementById('addModal').classList.remove('show'); isAddingLocation = false;
-    if (tempMarker) { map.removeLayer(tempMarker); tempMarker = null; }
-    ['formName','formCategory','formLocalidad','formAddress','formPhone','formSocial','formDesc','formLat','formLng'].forEach(id => document.getElementById(id).value = '');
-  }
-  function submitBusiness() {
-    const name = document.getElementById('formName').value.trim();
-    const category = document.getElementById('formCategory').value;
-    const localidad = document.getElementById('formLocalidad').value;
-    const address = document.getElementById('formAddress').value.trim();
-    if (!name || !category || !localidad || !address) { alert('Por favor completa los campos obligatorios (*)'); return; }
-    const icons = { gastronomia:'🍽️', belleza:'💇🏿', artesanias:'🎨', cultura:'🥁', moda:'👗', servicios:'💼' };
-    const defaultCoords = { 'Usaquén':[4.695,-74.033], 'Chapinero':[4.645,-74.062], 'Santa Fe':[4.600,-74.072], 'San Cristóbal':[4.570,-74.088], 'Usme':[4.485,-74.126], 'Tunjuelito':[4.576,-74.132], 'Bosa':[4.618,-74.183], 'Kennedy':[4.625,-74.140], 'Fontibón':[4.672,-74.140], 'Engativá':[4.698,-74.108], 'Suba':[4.742,-74.083], 'Barrios Unidos':[4.665,-74.068], 'Teusaquillo':[4.636,-74.082], 'Los Mártires':[4.605,-74.087], 'Antonio Nariño':[4.587,-74.098], 'Puente Aranda':[4.618,-74.108], 'La Candelaria':[4.596,-74.073], 'Rafael Uribe Uribe':[4.564,-74.112], 'Ciudad Bolívar':[4.522,-74.153], 'Sumapaz':[4.320,-74.210] };
-    const lat = parseFloat(document.getElementById('formLat').value) || (defaultCoords[localidad]?defaultCoords[localidad][0]:4.6486);
-    const lng = parseFloat(document.getElementById('formLng').value) || (defaultCoords[localidad]?defaultCoords[localidad][1]:-74.0628);
-    const newBiz = { id:Date.now(), name, category, icon:icons[category], address, localidad, phone:document.getElementById('formPhone').value.trim(), social:document.getElementById('formSocial').value.trim(), desc:document.getElementById('formDesc').value.trim()||'Emprendimiento afrocolombiano en Bogotá.', lat, lng };
-    businesses.push(newBiz); closeAddModal(); renderMarkers();
-    renderList(activeFilter==='todos'?businesses:businesses.filter(b=>b.category===activeFilter));
-    updateStats(); setTimeout(()=>focusBusiness(newBiz.id),300);
-  }
-  function updateStats() {
-    document.getElementById('totalCount').textContent = businesses.length;
-    document.getElementById('localidadCount').textContent = new Set(businesses.map(b => b.localidad)).size;
-  }
-  window.addEventListener('load', () => { if (typeof L !== 'undefined') initMap(); });
 </script>
 
 <!-- ==========================================
