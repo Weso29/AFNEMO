@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="https://mapas.gobiernobogota.gov.co/waportal/apps/mapviewer/node_modules/@arcgis/embeddable-components/dist/arcgis-embeddable-components/arcgis-embeddable-components.esm.js"></script>
 <style>
   :root {
     /* Paleta Diáspora Africana · Pacífico Colombiano */
@@ -1624,7 +1625,47 @@
     #mapBogota { height: 450px; }
     .map-sidebar { border-left: none; border-top: 1px solid rgba(44,24,16,0.06); max-height: 400px; }
   }
-
+/* ============================================
+     MAPA INSTITUCIONAL ARCGIS
+  ============================================ */
+  .arcgis-section {
+    padding: 5rem 3rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .arcgis-section-header {
+    margin-bottom: 2.5rem;
+  }
+  .arcgis-section-header h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    color: var(--deep-brown);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .arcgis-section-header p {
+    color: rgba(44, 24, 16, 0.5);
+    font-size: 1rem;
+    font-weight: 300;
+    max-width: 600px;
+    margin-top: 0.5rem;
+  }
+  .arcgis-map-wrapper {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(44, 24, 16, 0.08);
+    box-shadow: 0 10px 40px rgba(44, 24, 16, 0.08);
+    background: white;
+  }
+  .arcgis-map-wrapper arcgis-embedded-map {
+    display: block;
+    width: 100%;
+    height: 600px;
+  }
+  @media (max-width: 768px) {
+    .arcgis-section { padding: 3rem 1.5rem 2rem; }
+    .arcgis-map-wrapper arcgis-embedded-map { height: 400px; }
+  }
   /* ============================================
      CHATBOT WIDGET — agregado al final, sin tocar nada anterior
   ============================================ */
@@ -1867,6 +1908,7 @@
     <li><a href="#about">Nosotros</a></li>
     <li><a href="#programs">Programas</a></li>
     <li><a href="#mapa">Mapa</a></li>
+    <li><a href="#mapa-institucional">Mapa ArcGIS</a></li>
     <li><a href="#news">Noticias</a></li>
     <li><a href="#team">Equipo</a></li>
     <li><a href="#contact">Contacto</a></li>
@@ -2213,6 +2255,24 @@
       <div class="stat-number" id="localidadCount">0</div>
       <div class="stat-label">Localidades de Bogotá</div>
     </div>
+  </div>
+</section>
+<!-- ==========================================
+     MAPA INSTITUCIONAL ARCGIS
+========================================== -->
+<section class="arcgis-section" id="mapa-institucional">
+  <div class="arcgis-section-header">
+    <div class="section-tag">Mapa Institucional</div>
+    <h2>Mapa Georreferenciado AFNEMO</h2>
+    <p>Explora nuestro mapa institucional con la información georreferenciada de las iniciativas y presencia territorial de la asociación.</p>
+  </div>
+  <div class="arcgis-map-wrapper">
+    <arcgis-embedded-map
+      item-id="a9e507d5218647efb0d83119272b7338"
+      theme="light"
+      portal-url="https://mapas.gobiernobogota.gov.co/waportal"
+      strict-portal>
+    </arcgis-embedded-map>
   </div>
 </section>
 <!-- Modal para agregar emprendimiento -->
