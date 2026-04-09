@@ -1,0 +1,156 @@
+/* ============================================
+   AFNEMO - main.css
+   CSS variables, reset, typography, utility classes
+   ============================================ */
+
+:root {
+  /* Paleta Diáspora Africana · Pacífico Colombiano */
+  --gold: #C8860A;          /* Ocre dorado – kente, arena del Pacífico */
+  --gold-light: #E0A83A;
+  --deep-brown: #1C0A00;    /* Tierra oscura */
+  --warm-black: #090C07;    /* Verde-negro selva */
+  --earth-red: #B5451B;     /* Terracota – tierra africana */
+  --earth-red-light: #D4621E;
+  --cream: #F0E8D5;         /* Marfil cálido */
+  --cream-dark: #DDD0B8;
+  --sage: #1B4D35;          /* Verde selva profundo – Pacífico */
+  --sage-light: #2E7D55;    /* Verde esmeralda */
+  --pacific: #0D4A63;       /* Azul Pacífico profundo */
+  --text-dark: #1C0A00;
+  --text-light: #F0E8D5;
+  --accent-orange: #D97B2F;
+  --overlay: rgba(9, 12, 7, 0.72);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gold);
+  color: var(--warm-black);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(212, 168, 83, 0.3);
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--cream);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1.5px solid rgba(245, 237, 224, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-3px);
+}
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--cream);
+  color: var(--earth-red);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-white:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ─── SECTION TAG ─── */
+.section-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--earth-red);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 2rem;
+}
+.section-tag::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 1.2rem;
+  height: 2px;
+  background: var(--earth-red);
+}
+
+/* ─── UI PROTOTYPE NOTE (dev only) ─── */
+.ui-note {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(0,0,0,0.85);
+  color: #0f0;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  z-index: 9999;
+  max-width: 280px;
+  line-height: 1.5;
+  border: 1px solid rgba(0,255,0,0.2);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.3s ease;
+}
+.ui-note-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10000;
+  background: rgba(0,0,0,0.85);
+  color: #0f0;
+  border: 1px solid rgba(0,255,0,0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+.ui-note.hidden { opacity: 0; pointer-events: none; }

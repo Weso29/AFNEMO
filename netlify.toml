@@ -1,0 +1,59 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "http://afnemo.co/*"
+  to = "https://afnemo.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.afnemo.co/*"
+  to = "https://afnemo.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.afnemo.co/*"
+  to = "https://afnemo.co/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(self)"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://identity.netlify.com https://unpkg.com https://js.arcgis.com https://mapas.gobiernobogota.gov.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://js.arcgis.com; font-src 'self' https://fonts.gstatic.com https://js.arcgis.com; img-src 'self' data: https: blob:; connect-src 'self' https://*.arcgis.com https://mapas.gobiernobogota.gov.co https://api.netlify.com https://summer-wildflower-8156.santiagopazbedoya.workers.dev; frame-src 'self' https://*.arcgis.com https://mapas.gobiernobogota.gov.co; worker-src blob:;"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"

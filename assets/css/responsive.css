@@ -1,0 +1,61 @@
+/* ============================================
+   AFNEMO - responsive.css
+   All @media queries
+   ============================================ */
+
+/* ─── HERO MOBILE (900px) ─── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 2rem 2rem 4rem; justify-content: flex-end; min-height: 100vh; }
+  .about-origen, .about-mv-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .about-origen, .about-mv { padding: 3rem 1.5rem; }
+}
+
+/* ─── TABLET (1024px) ─── */
+@media (max-width: 1024px) {
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .programs-grid { grid-template-columns: 1fr 1fr; }
+  .news-grid { grid-template-columns: 1fr 1fr; }
+  .news-card:first-child { grid-column: span 2; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .map-container { grid-template-columns: 1fr; height: auto; }
+  #mapBogota { height: 450px; }
+  .map-sidebar { border-left: none; border-top: 1px solid rgba(44,24,16,0.06); max-height: 400px; }
+}
+
+/* ─── MOBILE (768px) ─── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-card:first-child { grid-column: span 1; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .newsletter-form { flex-direction: column; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .cta-actions { flex-direction: column; align-items: center; }
+  .map-section { padding: 5rem 1.5rem 3rem; }
+  .map-section-header { flex-direction: column; align-items: flex-start; }
+  .map-stats-bar { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .arcgis-section { padding: 3rem 1.5rem 2rem; }
+  .arcgis-map-wrapper arcgis-embedded-map { height: 400px; }
+}
+
+/* ─── SMALL MOBILE (480px) ─── */
+@media (max-width: 480px) {
+  #chat-window {
+    right: 0.75rem;
+    left: 0.75rem;
+    width: auto;
+    bottom: 5.5rem;
+  }
+  #chat-bubble { right: 1.2rem; bottom: 1.2rem; }
+}

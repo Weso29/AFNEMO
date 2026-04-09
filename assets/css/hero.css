@@ -1,0 +1,236 @@
+/* ============================================
+   AFNEMO - hero.css
+   Hero section and stats bar styles
+   ============================================ */
+
+/* ─── HERO SPLIT LAYOUT ─── */
+.hero {
+  height: 100vh;
+  min-height: 700px;
+  background: var(--warm-black);
+  position: relative;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 4rem 5rem;
+  position: relative;
+  z-index: 2;
+}
+.hero-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(27,77,53,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-right {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--warm-black) 0%, transparent 30%);
+  z-index: 2;
+  pointer-events: none;
+}
+.hero-img-wrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+.hero-img-frame {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+.hero-img-frame::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: -10px; right: 10px; bottom: 10px;
+  border: 2px solid rgba(200,134,10,0.4);
+  border-radius: 14px;
+  z-index: 0;
+}
+.hero-img-frame::after {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px; right: -10px; bottom: -10px;
+  border: 1px solid rgba(27,77,53,0.45);
+  border-radius: 14px;
+  z-index: 0;
+}
+.hero-img-frame img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.7);
+  display: block;
+  object-fit: cover;
+}
+
+/* Pattern deco strip on hero right */
+.hero-pattern-strip {
+  position: absolute;
+  top: 0; bottom: 0; right: 0;
+  width: 40px;
+  background: repeating-linear-gradient(
+    180deg,
+    var(--earth-red) 0px, var(--earth-red) 14px,
+    var(--gold) 14px, var(--gold) 28px,
+    var(--sage) 28px, var(--sage) 42px,
+    var(--warm-black) 42px, var(--warm-black) 56px
+  );
+  opacity: 0.7;
+  z-index: 3;
+}
+.hero-bg { display: none; }
+.hero-deco { display: none; }
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(212, 168, 83, 0.15);
+  border: 1px solid rgba(212, 168, 83, 0.3);
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s ease 0.3s both;
+}
+.hero-tag-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  color: var(--cream);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s ease 0.5s both;
+}
+.hero h1 span {
+  color: var(--gold);
+  font-style: italic;
+}
+.hero-desc {
+  font-size: 1.15rem;
+  color: rgba(245, 237, 224, 0.7);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  animation: fadeUp 1s ease 0.7s both;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  animation: fadeUp 1s ease 0.9s both;
+}
+
+/* ─── SCROLL INDICATOR ─── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(245, 237, 224, 0.4);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: fadeUp 1s ease 1.2s both;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+/* ─── STATS BAR ─── */
+.stats-bar {
+  background: var(--deep-brown);
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  position: relative;
+}
+.stats-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--earth-red), var(--sage), var(--gold));
+}
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+}
+.stat-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: rgba(240,232,213,0.5);
+  letter-spacing: 0.05em;
+  font-weight: 300;
+}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
